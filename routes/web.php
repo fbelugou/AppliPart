@@ -1,13 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-Route::get('/', ['as' => 'home', function(){
-  return view('welcome');
-}]);
-
-Route::get('contact',[])
-Route::post('contact',['uses'=>'GestionController'])
-=======
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,4 +22,3 @@ Route::post('contact', 'GestionController@postInfos');
     return view('article')->withNumero($n);
     return view('article')->with('numero', $n);
 */
->>>>>>> aprrentissage
