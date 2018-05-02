@@ -23,10 +23,6 @@ class CreationTableInterlocuteur extends Migration
             $table->string('mail');
             $table->string('commentaire');
             $table->boolean('transmission');
-            $table->unsignedInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('interlocuteur_event')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -38,9 +34,6 @@ class CreationTableInterlocuteur extends Migration
      */
     public function down()
     {
-        Schema::table('interlocuteur', function (Blueprint $table) {
-            $table->dropForeign('interlocuteur_event_id_foreign');
-        });
         Schema::dropIfExists('interlocuteur');
     }
 }

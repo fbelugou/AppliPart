@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class InterlocuteurEvent extends Model
 {
     use Notifiable;
 
@@ -15,7 +14,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+      'utilisateur','date','nature','commentaire',
     ];
 
     /**
@@ -24,6 +23,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        //'password', 'remember_token',
     ];
+
+    public function entreprises()
+  	{
+  		return $this->belongsToMany('App\entreprise');
+  	}
 }

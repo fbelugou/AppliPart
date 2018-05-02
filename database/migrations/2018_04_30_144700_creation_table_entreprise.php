@@ -30,10 +30,6 @@ class CreationTableEntreprise extends Migration
             $table->foreign('groupe_id')->references('id')->on('groupe')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->unsignedInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('entreprise_event')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
             $table->unsignedInteger('coord_id');
             $table->foreign('coord_id')->references('id')->on('coordonees')
                 ->onDelete('restrict')
@@ -51,7 +47,6 @@ class CreationTableEntreprise extends Migration
     {
         Schema::table('entreprise', function(Blueprint $table) {
             $table->dropForeign('entreprise_groupe_id_foreign');
-            $table->dropForeign('entreprise_event_id_foreign');
             $table->dropForeign('entreprise_coord_id_foreign');
         });
         Schema::dropIfExists('entreprise');

@@ -13,12 +13,16 @@ class CreationTableInterlocuteurEvent extends Migration
      */
     public function up()
     {
-        Schema::create('interlocuteur_event', function (Blueprint $table) {
+        Schema::create('interlocuteurEvent', function (Blueprint $table) {
             $table->increments('id');
             $table->string('utilisateur');
             $table->date('date');
             $table->string('nature');
             $table->string('commentaire');
+            $table->unsignedInteger('interlocuteur_id');
+            $table->foreign('interlocuteur_id')->references('id')->on('interlocuteur')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -30,6 +34,9 @@ class CreationTableInterlocuteurEvent extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interlocuteur_event');
+        Schema::table('interlocuteurEvent', function (Blueprint $table) {
+            $table->dropForeign('interlocuteur_interlocuteur_id_foreign');
+        });
+        Schema::dropIfExists('interlocuteurEvent');
     }
 }
