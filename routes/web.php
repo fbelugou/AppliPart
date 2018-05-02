@@ -13,10 +13,9 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'GestionController@index']);
 
-Route::get('contact', 'GestionController@getInfos');
-Route::post('contact', 'GestionController@postInfos');
-
 /*
+    Route::get('contact', 'GestionController@getInfos');
+    Route::post('contact', 'GestionController@postInfos');
     return Response::make('texte', 200);
     return view('article',['numero' => $n]);
     return view('article')->withNumero($n);
