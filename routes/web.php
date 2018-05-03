@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'GestionController@index']);
+Route::get('/', ['as' => 'accueil', 'uses' => 'GestionController@index']);
+Route::post('/recherche/Actions', ['as' => 'rechercheActions', 'uses' => 'GestionController@index']);
+Route::post('/recherche/Groupes', ['as' => 'rechercheGroupes', 'uses' => 'GestionController@index']);
+Route::post('/recherche/Entreprises', ['as' => 'rechercheEntreprises', 'uses' => 'GestionController@index']);
+Route::post('/recherche/Interlocuteurs', ['as' => 'rechercheInterlocuteurs', 'uses' => 'GestionController@index']);
+Route::post('/recherche/EntreprisesDist', ['as' => 'rechercheEntreprisesDist', 'uses' => 'GestionController@index']);
+
 
 /*
     Route::get('contact', 'GestionController@getInfos');

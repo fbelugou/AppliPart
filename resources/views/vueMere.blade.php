@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('titre')</title>
-    {!! Html::style('https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') !!}
-    {!! Html::style('https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css') !!}
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
     <style> textarea { resize: none; } </style>
 </head>
 <body>
