@@ -11,4 +11,10 @@ class GestionController extends Controller
     {
         return view('Accueil');
     }
+
+    public function listerPartenaires()
+    {
+      
+        return view('listeEntreprises',['entreprises' => $tabEnt]);
+    }
 }

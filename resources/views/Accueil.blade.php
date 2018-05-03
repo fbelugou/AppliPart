@@ -55,14 +55,14 @@
         <div class="card-body">
 					<div class="row">
 						<div class="col-sm-6">
-             <a href="#"><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des partenaires réguliers</button></a><br/>
-						 <a href="#"><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des groupes</button></a><br/>
-						 <a href="#"><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des interlocuteurs</button></a><br/>
-						 <a href="#"><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des actions</button></a><br/>
+             <a href={{ route('Partenaires') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des partenaires réguliers</button></a><br/>
+						 <a href={{ route('Groupes') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des groupes</button></a><br/>
+						 <a href={{ route('Interlocuteurs') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des interlocuteurs</button></a><br/>
+						 <a href={{ route('Actions') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des actions</button></a><br/>
 					 </div>
 					 <div class="col-sm-6">
-						 <a href="#"><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des entreprises</button></a><br/>
-						 <a href="#"><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Génerer des badges</button></a><br/>
+						 <a href={{ route('Entreprises') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des entreprises</button></a><br/>
+						 <a href={{ route('Badges') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Génerer des badges</button></a><br/>
 						 	{{ Form::open(['url' => route('rechercheActions')]) }}
 						 		<div class="form-group">
 									 {{ Form::select('Choisissez une action', [
@@ -150,7 +150,7 @@
 
 <script>
 	document.getElementById('limitation').checked=false;
-	
+
 	function changerEtat(){
 		var etat = document.getElementById('limitation').checked;
 		document.getElementById('limiteGrp').value=etat;

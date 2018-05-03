@@ -12,6 +12,12 @@
 */
 
 Route::get('/', ['as' => 'accueil', 'uses' => 'GestionController@index']);
+Route::get('/Partenaires', ['as' => 'Partenaires', 'uses' => 'GestionController@listerPartenaires']);
+Route::get('/Groupes', ['as' => 'Groupes', 'uses' => 'GestionController@listerGroupes']);
+Route::get('/Interlocuteurs', ['as' => 'Interlocuteurs', 'uses' => 'GestionController@listerInterlocuteurs']);
+Route::get('/Actions', ['as' => 'Actions', 'uses' => 'GestionController@listerActions']);
+Route::get('/Entreprises', ['as' => 'Entreprises', 'uses' => 'GestionController@listerEntreprises']);
+Route::get('/Badges', ['as' => 'Badges', 'uses' => 'GestionController@genererBadges']);
 Route::post('/recherche/Actions', ['as' => 'rechercheActions', 'uses' => 'GestionController@index']);
 Route::post('/recherche/Groupes', ['as' => 'rechercheGroupes', 'uses' => 'GestionController@index']);
 Route::post('/recherche/Entreprises', ['as' => 'rechercheEntreprises', 'uses' => 'GestionController@index']);
