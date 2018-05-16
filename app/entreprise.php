@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Entreprise extends Model
 {
+    public $table = "entreprises";
     use Notifiable;
 
     /**
@@ -14,7 +15,7 @@ class Entreprise extends Model
      * @var array
      */
     protected $fillable = [
-      'nom','partenaireRegulier','siegeSocial','adresse','taille','rue','ville','cp','siteWeb','telephone','commentaire','groupe_id','event_id','coord_id',
+      'nom','partenaireRegulier','siegeSocial','taille','rue','ville','cp','siteWeb','telephone','commentaire','groupe_id','coord_id',
     ];
 
     /**
@@ -28,31 +29,36 @@ class Entreprise extends Model
 
     public function actions()
   	{
-  		return $this->hasMany('App\action');
+  		return $this->hasMany('App\Action');
   	}
 
     public function evenements()
   	{
-  		return $this->hasMany('App\entrepriseEvenement');
+  		return $this->hasMany('App\EntrepriseEvenement','entrepriseevents');
   	}
 
     public function activites()
   	{
-  		return $this->belongsToMany('App\activite');
+  		return $this->belongsToMany('App\Activite','entreprises_activites');
   	}
 
     public function filieres()
   	{
-  		return $this->belongsToMany('App\filiere');
+  		return $this->belongsToMany('App\Filiere','entreprises_filieres');
   	}
 
     public function interlocuteurs()
   	{
-  		return $this->belongsToMany('App\interlocuteur')->withPivot('contactAMIO','date','objet','commentaire');
+  		return $this->belongsToMany('App\Interlocuteur','contacts')->withPivot('id','contactAMIO','date','objet','commentaire');
   	}
 
     public function coordonnees()
   	{
-  		return $this->hasOne('App\coordonnees');
+  		return $this->hasOne('App\Coordonnees');
+  	}
+
+    public function groupe()
+  	{
+  		return $this->belongsTo('App\Groupe');
   	}
 }

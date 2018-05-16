@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Action extends Model
 {
+    public $table = "actions";
     use Notifiable;
 
     /**
@@ -28,6 +29,6 @@ class Action extends Model
 
     public function entreprise()
   	{
-  		return $this->belongsTo('App\entreprise');
+  		return $this->belongsTo('App\Entreprise');
   	}
 }

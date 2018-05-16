@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class InterlocuteurEvent extends Model
 {
+    public $table = "interlocuteurEvents";
     use Notifiable;
 
     /**
@@ -28,6 +29,6 @@ class InterlocuteurEvent extends Model
 
     public function entreprises()
   	{
-  		return $this->belongsToMany('App\entreprise');
+  		return $this->belongsToMany('App\Entreprise');
   	}
 }

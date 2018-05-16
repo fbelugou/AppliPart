@@ -6,36 +6,36 @@
 	<div class="row">
 		<div class="col-md-12">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
 
       	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       		<span class="navbar-toggler-icon"></span>
       	</button>
-        <a class="navbar-brand" href="{{ route('accueil') }}">
+        <a class="navbar-brand" href="{{ route('Accueil') }}">
           <img src="{{ URL::asset('img/AMIOlogo.png') }}" height="33 px" width="83 px"class="rounded float-left" alt="logo AMIO">
         </a>
       	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       		<ul class="navbar-nav ml-md-auto">
       			<li class="nav-item active">
-      				 <a class="nav-link active" href="#">Accueil<span class="sr-only">(current)</span></a>
+      				 <a class="nav-link active" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="#">Groupes</a>
+      				 <a class="nav-link active" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="#">Entreprises</a>
+      				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="#">Actions</a>
+      				 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
-               <a class="nav-link active" href="#">Interlocuteurs</a>
+               <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
             </li>
             <li class="nav-item">
       				 <span class="navbar-text">Utilisateur : XX</span>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="#">Déconnexion</a>
+      				 <a class="nav-link active" href="{{ route('logout') }}">Déconnexion</a>
       			</li>
       		</ul>
       	</div>
@@ -65,7 +65,7 @@
 						 <a href={{ route('Badges') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Génerer des badges</button></a><br/>
 						 	{{ Form::open(['url' => route('rechercheActions')]) }}
 						 		<div class="form-group">
-									 {{ Form::select('Choisissez une action', [
+									 {{ Form::select('action', [
 										   'Stage' => 'Stage',
 										   'Alternance' => 'Alternance',
 										   'JobDating' => 'JobDating',
@@ -103,7 +103,7 @@
 				    <div class="col-sm-6">
 							{{ Form::open(['url' => route('rechercheGroupes')]) }}
 								{{ Form::hidden('limiteGrp', 'false', array('id' => 'limiteGrp')) }}
-								{{ Form::text('grp', 'Cagemini', ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
+								{{ Form::text('grp', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Capgemini']) }}
 						</div>
 						<div class="col-sm-6">
 								{{ Form::submit('Rechercher un groupe',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
@@ -112,7 +112,7 @@
 						<div class="col-sm-6">
 							{{ Form::open(['url' => route('rechercheEntreprises')]) }}
 								{{ Form::hidden('limiteEnt', 'false', array('id' => 'limiteEnt')) }}
-								{{ Form::text('ent', 'Cagemini Toulouse', ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
+								{{ Form::text('ent', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Capgemini Toulouse']) }}
 						</div>
 						<div class="col-sm-6">
 								{{ Form::submit('Rechercher une entreprise',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
@@ -121,7 +121,7 @@
 						<div class="col-sm-6">
 							{{ Form::open(['url' => route('rechercheInterlocuteurs')]) }}
 								{{ Form::hidden('limiteInt', 'false', array('id' => 'limiteInt')) }}
-								{{ Form::text('int', 'Baptiste Lagarde', ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
+								{{ Form::text('int',null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Baptiste Lagarde']) }}
 						</div>
 						<div class="col-sm-6">
 								{{ Form::submit('Rechercher un interlocuteur',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
@@ -130,10 +130,10 @@
 						<div class="col-sm-5">
 							{{ Form::open(['url' => route('rechercheEntreprisesDist')],['class'=>'form-inline']) }}
 								{{ Form::hidden('limiteEntDist', 'false', array('id' => 'limiteEntDist')) }}
-								{{ Form::text('ville', 'Millau', ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
+								{{ Form::text('ville', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Millau']) }}
 						</div>
 						<div class="col-sm-1">
-								{{ Form::text('dist', '25', ['class' => 'form-control','style'=>'height:3rem;width:5rem;margin-bottom:15px;']) }}
+								{{ Form::text('dist', null, ['class' => 'form-control','style'=>'height:3rem;width:5rem;margin-bottom:15px;','placeholder'=>'25']) }}
 						</div>
 						<div class="col-sm-1">
 								{{ Form::label('km', 'Km',['style'=>'font-size:20px;margin-top:9px']) }}
@@ -150,6 +150,10 @@
 
 <script>
 	document.getElementById('limitation').checked=false;
+	document.getElementById('limiteGrp').value=false;
+	document.getElementById('limiteEnt').value=false;
+	document.getElementById('limiteInt').value=false;
+	document.getElementById('limiteEntDist').value=false;
 
 	function changerEtat(){
 		var etat = document.getElementById('limitation').checked;

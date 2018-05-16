@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreationTableAction extends Migration
+class CreationTableActions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreationTableAction extends Migration
      */
     public function up()
     {
-        Schema::create('action', function (Blueprint $table) {
+        Schema::create('actions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nature');
             $table->date('date');
-            $table->string('commentaire');
-            $table->unsignedInteger('entreprise_id');
-            $table->foreign('entreprise_id')->references('id')->on('entreprise')
+            $table->text('commentaire');
+            $table->unsignedInteger('entreprise_id')->nullable();
+            $table->foreign('entreprise_id')->references('id')->on('entreprises')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->timestamps();
@@ -33,9 +33,9 @@ class CreationTableAction extends Migration
      */
     public function down()
     {
-        Schema::table('action', function(Blueprint $table) {
-            $table->dropForeign('action_entreprise_id_foreign');
+        Schema::table('actions', function(Blueprint $table) {
+            $table->dropForeign('actions_entreprise_id_foreign');
         });
-        Schema::dropIfExists('action');
+        Schema::dropIfExists('actions');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreationTableEntreprise extends Migration
+class CreationTableEntreprises extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,23 @@ class CreationTableEntreprise extends Migration
      */
     public function up()
     {
-        Schema::create('entreprise', function (Blueprint $table) {
+        Schema::create('entreprises', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
             $table->boolean('partenaireRegulier');
             $table->boolean('siegeSocial');
-            $table->string('adresse');
             $table->integer('taille');
-            $table->string('rue');
-            $table->string('ville');
-            $table->string('cp');
-            $table->string('siteWeb');
-            $table->string('telephone');
-            $table->string('commentaire');
-            $table->unsignedInteger('groupe_id');
-            $table->foreign('groupe_id')->references('id')->on('groupe')
+            $table->string('rue')->nullable();
+            $table->string('ville')->nullable();
+            $table->string('cp')->nullable();
+            $table->string('siteWeb')->nullable();
+            $table->string('telephone')->nullable();
+            $table->text('commentaire')->nullable();
+            $table->unsignedInteger('groupe_id')->nullable();
+            $table->foreign('groupe_id')->references('id')->on('groupes')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->unsignedInteger('coord_id');
+            $table->unsignedInteger('coord_id')->nullable();
             $table->foreign('coord_id')->references('id')->on('coordonees')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
@@ -45,10 +44,10 @@ class CreationTableEntreprise extends Migration
      */
     public function down()
     {
-        Schema::table('entreprise', function(Blueprint $table) {
-            $table->dropForeign('entreprise_groupe_id_foreign');
-            $table->dropForeign('entreprise_coord_id_foreign');
+        Schema::table('entreprises', function(Blueprint $table) {
+            $table->dropForeign('entreprises_groupe_id_foreign');
+            $table->dropForeign('entreprises_coord_id_foreign');
         });
-        Schema::dropIfExists('entreprise');
+        Schema::dropIfExists('entreprises');
     }
 }

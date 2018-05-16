@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Groupe extends Model
 {
+    public $table = "groupes";
     use Notifiable;
 
     /**
@@ -28,6 +29,6 @@ class Groupe extends Model
 
     public function entreprises()
   	{
-  		return $this->hasMany('App\entreprise');
+  		return $this->hasMany('App\Entreprise');
   	}
 }

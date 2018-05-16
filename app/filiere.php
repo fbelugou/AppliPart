@@ -1,11 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Filiere extends Model
 {
+    public $table = "filieres";
     use Notifiable;
 
     /**
@@ -28,6 +29,6 @@ class Filiere extends Model
 
     public function entreprises()
   	{
-  		return $this->belongsToMany('App\entreprise');
+  		return $this->belongsToMany('App\Entreprise');
   	}
 }

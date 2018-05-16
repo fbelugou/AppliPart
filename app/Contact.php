@@ -4,9 +4,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Coordonnees extends Model
+class Contact extends Model
 {
-    public $table = "coordonnees";
+    public $table = "contacts";
     use Notifiable;
 
     /**
@@ -15,7 +15,7 @@ class Coordonnees extends Model
      * @var array
      */
     protected $fillable = [
-      'lattitude','longitude',
+      'contactAMIO','date','objet','commentaire',
     ];
 
     /**
@@ -24,11 +24,16 @@ class Coordonnees extends Model
      * @var array
      */
     protected $hidden = [
-        //'password', 'remember_token',
+        'interlocuteur_id', 'entreprise_id',
     ];
 
     public function entreprise()
   	{
-  		return $this->belongsTo('App\Entreprise');
+  		return $this->hasOne('App\Entreprise');
+  	}
+
+    public function interlocuteur()
+  	{
+  		return $this->hasOne('App\Interlocuteur');
   	}
 }

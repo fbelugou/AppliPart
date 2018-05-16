@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreationTableInterlocuteurEvent extends Migration
+class CreationTableInterlocuteurEvents extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreationTableInterlocuteurEvent extends Migration
      */
     public function up()
     {
-        Schema::create('interlocuteurEvent', function (Blueprint $table) {
+        Schema::create('interlocuteurEvents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('utilisateur');
             $table->date('date');
             $table->string('nature');
-            $table->string('commentaire');
-            $table->unsignedInteger('interlocuteur_id');
-            $table->foreign('interlocuteur_id')->references('id')->on('interlocuteur')
+            $table->text('commentaire');
+            $table->unsignedInteger('interlocuteur_id')->nullable();
+            $table->foreign('interlocuteur_id')->references('id')->on('interlocuteurs')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->timestamps();
@@ -34,9 +34,9 @@ class CreationTableInterlocuteurEvent extends Migration
      */
     public function down()
     {
-        Schema::table('interlocuteurEvent', function (Blueprint $table) {
-            $table->dropForeign('interlocuteur_interlocuteur_id_foreign');
+        Schema::table('interlocuteurEvents', function (Blueprint $table) {
+            $table->dropForeign('interlocuteurs_interlocuteur_id_foreign');
         });
-        Schema::dropIfExists('interlocuteurEvent');
+        Schema::dropIfExists('interlocuteurEvents');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreationTableFiliere extends Migration
+class CreationTableFilieres extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreationTableFiliere extends Migration
      */
     public function up()
     {
-        Schema::create('filiere', function (Blueprint $table) {
+        Schema::create('filieres', function (Blueprint $table) {
             $table->increments('id');
             $table->string('metier');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreationTableFiliere extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filiere');
+        Schema::dropIfExists('filieres');
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Interlocuteur extends Model
 {
-    use Notifiable;
+    public $table = "interlocuteurs";
+    use Notifiable; 
 
     /**
      * The attributes that are mass assignable.
@@ -28,12 +29,12 @@ class Interlocuteur extends Model
 
     public function evenements()
   	{
-  		return $this->hasMany('App\interlocuteurEvenement');
+  		return $this->hasMany('App\InterlocuteurEvenement');
   	}
 
 
     public function entreprises()
   	{
-  		return $this->belongsToMany('App\entreprise')->withPivot('contactAMIO','date','objet','commentaire');
+  		return $this->belongsToMany('App\Entreprise')->withPivot('contactAMIO','date','objet','commentaire');
   	}
 }
