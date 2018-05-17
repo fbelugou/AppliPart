@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Interlocuteur extends Model
 {
     public $table = "interlocuteurs";
-    use Notifiable; 
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +35,6 @@ class Interlocuteur extends Model
 
     public function entreprises()
   	{
-  		return $this->belongsToMany('App\Entreprise')->withPivot('contactAMIO','date','objet','commentaire');
+  		return $this->belongsToMany('App\Entreprise','contacts')->withPivot('contactAMIO','date','objet','commentaire');
   	}
 }

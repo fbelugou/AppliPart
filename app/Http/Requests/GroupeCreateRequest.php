@@ -13,7 +13,7 @@ class GroupeCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class GroupeCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+          'nom' => 'required|max:255',
+          'taille' => 'numeric',
         ];
     }
 }

@@ -28,7 +28,7 @@ class EntrepriseRepository
         $entreprise->ville=$inputs['ville'];
         $entreprise->cp=$inputs['cp'];
         $entreprise->siteWeb=$inputs['siteWeb'];
-        $entreprise->telephone=$inputs['tel'];
+        $entreprise->telephone=$inputs['telephone'];
         $entreprise->commentaire=$inputs['commentaire'];
         if($inputs['groupe_id']!=0){
             $entreprise->groupe_id=$inputs['groupe_id'];

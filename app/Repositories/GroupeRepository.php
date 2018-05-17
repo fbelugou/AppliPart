@@ -17,16 +17,7 @@ class GroupeRepository
   	private function save(Groupe $groupe, Array $inputs)
   	{
         $groupe->nom=$inputs['nom'];
-        //$groupe->partenaireRegulier=isset($inputs['partenaireRegulier']);
-        //$groupe->siegeSocial=isset($inputs['siegeSocial']);
         $groupe->taille=$inputs['taille'];
-        $groupe->rue=$inputs['rue'];
-        $groupe->cp=$inputs['cp'];
-        $groupe->siteWeb=$inputs['siteWeb'];
-        $groupe->telephone=$inputs['tel'];
-        $groupe->commentaire=$inputs['commentaire'];
-        //$groupe->groupe_id=$inputs['groupe_id'];
-        //$groupe->coord_id=$inputs['coord_id'];
 
     		$groupe->save();
   	}

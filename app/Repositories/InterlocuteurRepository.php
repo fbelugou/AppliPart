@@ -16,29 +16,56 @@ class InterlocuteurRepository
 
   	private function save(Interlocuteur $interlocuteur, Array $inputs)
   	{
+        $interlocuteur->prenom=$inputs['prenom'];
         $interlocuteur->nom=$inputs['nom'];
-        //$interlocuteur->partenaireRegulier=isset($inputs['partenaireRegulier']);
-        //$interlocuteur->siegeSocial=isset($inputs['siegeSocial']);
-        $interlocuteur->taille=$inputs['taille'];
-        $interlocuteur->rue=$inputs['rue'];
-        $interlocuteur->cp=$inputs['cp'];
-        $interlocuteur->siteWeb=$inputs['siteWeb'];
-        $interlocuteur->telephone=$inputs['tel'];
+        $interlocuteur->transmission=isset($inputs['transmission']);
+        $interlocuteur->fonction=$inputs['fonction'];
+        $interlocuteur->telFixe=$inputs['telFixe'];
+        $interlocuteur->telMobile=$inputs['telMobile'];
+        $interlocuteur->mail=$inputs['mail'];
         $interlocuteur->commentaire=$inputs['commentaire'];
-        //$interlocuteur->interlocuteur_id=$inputs['interlocuteur_id'];
-        //$interlocuteur->coord_id=$inputs['coord_id'];
+
+        switch ($inputs['civilite']) {
+          case 0:
+            $interlocuteur->civilite='M';
+            break;
+          case 1:
+            $interlocuteur->civilite='Mme';
+            break;
+          case 2:
+            $interlocuteur->civilite='Dr';
+            break;
+          case 3:
+            $interlocuteur->civilite='Pr';
+            break;
+          case 4:
+            $interlocuteur->civilite='Me';
+            break;
+        }
 
     		$interlocuteur->save();
+        if(isset($inputs['entreprises'])){
+            $interlocuteur->entreprises()->sync($inputs['entreprises']);
+        }
   	}
 
   	public function getInterlocuteurs()
   	{
-  		  return $this->interlocuteur->orderBy('prenom','asc')->get();
+  		  return $this->interlocuteur->orderBy('nom','asc')->get();
   	}
 
     public function getInterlocuteursId()
   	{
   		  return $this->interlocuteur->orderBy('id','asc')->get();
+  	}
+
+    public function getInterlocuteursMail()
+  	{
+        $interlocuteurs=$this->interlocuteur->orderBy('mail','asc')->get();
+        foreach ($interlocuteurs as $interlocuteur) {
+          $mails[]=$interlocuteur->mail;
+        }
+        return $mails;
   	}
 
   	public function store(Array $inputs)

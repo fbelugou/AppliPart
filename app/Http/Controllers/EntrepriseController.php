@@ -41,14 +41,14 @@ class EntrepriseController extends Controller
     {
         $entreprises = $this->entrepriseRepository->getEntreprises();
 
-        return view('ListeEntreprises', compact('entreprises'));
+        return view('Entreprise\ListeEntreprises', compact('entreprises'));
     }
 
     public function listerPartenaires()
     {
         $entreprises = $this->entrepriseRepository->getPartenaires();
 
-        return view('ListePartenaires', compact('entreprises'));
+        return view('Entreprise\ListePartenaires', compact('entreprises'));
     }
 
     public function ajouter()
@@ -74,21 +74,21 @@ class EntrepriseController extends Controller
             $interlocuteurs[$interlocuteur->id]=$interlocuteur->prenom." ".$interlocuteur->nom;
         }
 
-        return view('AjoutEntreprise',compact('groupes','activites','filieres','interlocuteurs'));
+        return view('Entreprise\AjoutEntreprise',compact('groupes','activites','filieres','interlocuteurs'));
     }
 
     public function enregistrer(EntrepriseCreateRequest $request)
     {
         $entreprise = $this->entrepriseRepository->store($request->all());
 
-        return view('FicheEntreprise',compact('entreprise'));
+        return redirect()->route('FicheEntreprise',['id' => $entreprise->id]);
     }
 
     public function afficher($id)
     {
         $entreprise = $this->entrepriseRepository->getById($id);
 
-        return view('FicheEntreprise',  compact('entreprise'));
+        return view('Entreprise\FicheEntreprise',  compact('entreprise'));
     }
 
     public function modifier($id)
@@ -114,13 +114,13 @@ class EntrepriseController extends Controller
         foreach ($tabinterlocuteurs as $interlocuteur) {
             $interlocuteurs[$interlocuteur->id]=$interlocuteur->prenom." ".$interlocuteur->nom;
         }
-        return view('ModifierEntreprise',  compact('entreprise','groupes','activites','filieres','interlocuteurs'));
+        return view('Entreprise\ModifierEntreprise',  compact('entreprise','groupes','activites','filieres','interlocuteurs'));
     }
 
     public function mettreAJour(EntrepriseUpdateRequest $request, $id)
     {
         $this->entrepriseRepository->update($id, $request->all());
-        return $this->afficher($id);
+        return redirect()->route('FicheInterlocuteur',['id' => $id]);
     }
 
     public function supprimer($id)

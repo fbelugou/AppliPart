@@ -15,26 +15,26 @@
         </a>
       	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       		<ul class="navbar-nav ml-md-auto">
-      			<li class="nav-item active">
-      				 <a class="nav-link active" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
+      			<li class="nav-item">
+      				 <a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Groupes') }}">Groupes</a>
+      				 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
       				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
+      				 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
-               <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+               <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
             </li>
             <li class="nav-item">
       				 <span class="navbar-text">Utilisateur : XX</span>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('logout') }}">Déconnexion</a>
+      				 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
       			</li>
       		</ul>
       	</div>
@@ -108,9 +108,9 @@
 			</table>
     </div>
 		<div class="col-sm-3">
-			{{ link_to_route('EntrepriseModifier', 'Modifier', ['id' => $entreprise->id ], ['class' => 'btn btn-info pull-right', 'style' => 'height:2.5rem;width:10rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
+			{{ link_to_route('EntrepriseModifier', 'Modifier', ['id' => $entreprise->id ],['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['EntrepriseSupprimer', $entreprise->id]]) !!}
-					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'height:2.5rem;width:10rem;margin-bottom:15px;' , 'onclick' => 'return confirm(\'Vraiment supprimer cet utilisateur ?\')']) !!}
+					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette entreprise ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
   </div>

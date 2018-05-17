@@ -15,26 +15,26 @@
         </a>
       	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       		<ul class="navbar-nav ml-md-auto">
-      			<li class="nav-item active">
-      				 <a class="nav-link active" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
+      			<li class="nav-item">
+      				 <a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
       			</li>
             <li class="nav-item">
       				 <a class="nav-link active" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+      				 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
+      				 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
-               <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+               <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
             </li>
             <li class="nav-item">
       				 <span class="navbar-text">Utilisateur : XX</span>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('logout') }}">Déconnexion</a>
+      				 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
       			</li>
       		</ul>
       	</div>
@@ -66,14 +66,18 @@
 							<td>
 								@if (!empty($groupe->entreprises))
 									@foreach($groupe->entreprises as $entreprise)
-										<a href="{{ route('FicheGroupe',['id' => ($entreprise->siegeSocial)? $entreprise->id : ' ' ])}}" class="text-dark">{{ ($entreprise->siegeSocial)? $entreprise->nom : ' '  }} </a>
+										@if($entreprise->siegeSocial)
+											<a href="{{ route('FicheEntreprise',['id' => ($entreprise->siegeSocial)? $entreprise->id : ' ' ])}}" class="text-dark">{{ ($entreprise->siegeSocial)? $entreprise->nom : ' '  }} </a> <br>
+										@endif
 									@endforeach
 								@endif
 							</td>
 							<td>
 								@if (!empty($groupe->entreprises))
 									@foreach($groupe->entreprises as $entreprise)
-										<a href="{{ route('FicheGroupe',['id' => ($entreprise->siegeSocial)? ' ' : $entreprise->id ])}}" class="text-dark">{{ ($entreprise->siegeSocial)? ' ' : $entreprise->nom  }} </a>
+										@if(!$entreprise->siegeSocial)
+										<a href="{{ route('FicheEntreprise',['id' => ($entreprise->siegeSocial)? ' ' : $entreprise->id ])}}" class="text-dark">{{ ($entreprise->siegeSocial)? ' ' : $entreprise->nom  }} </a> <br>
+										@endif
 									@endforeach
 								@endif
 							</td>
@@ -84,7 +88,7 @@
 			</div>
     </div>
 		<div class="col-sm-2">
-			{{ link_to_route('GroupeAjout', 'Ajouter un groupe', [], ['class' => 'btn btn-info pull-right']) }}
+			{{ link_to_route('GroupeAjout', 'Ajouter un groupe', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
 		</div>
   </div>
 </div>

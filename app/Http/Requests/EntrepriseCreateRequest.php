@@ -28,7 +28,10 @@ class EntrepriseCreateRequest extends FormRequest
             'taille' => 'required|numeric',
             'rue' => 'max:255',
             'ville' => 'max:255',
-            'commentaire' => 'max:255',
+            'cp' => 'max:255',
+            'siteWeb' => 'max:255',
+            'telephone' => 'max:255',
+            'commentaire' => 'max:65000',
         ];
     }
 }

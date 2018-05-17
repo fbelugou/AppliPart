@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Repositories\GroupeRepository;
 
+use App\Http\Requests\GroupeCreateRequest;
+use App\Http\Requests\GroupeUpdateRequest;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -22,46 +25,46 @@ class GroupeController extends Controller
     {
         $groupes = $this->groupeRepository->getGroupes();
 
-        return view('ListeGroupes', compact('groupes'));
+        return view('Groupe\ListeGroupes', compact('groupes'));
     }
 
     public function ajouter()
     {
-        return view('AjoutGroupe');
+        return view('Groupe\AjoutGroupe');
     }
 
     public function enregistrer(GroupeCreateRequest $request)
     {
         $groupe = $this->groupeRepository->store($request->all());
 
-        return redirect('groupe')->withOk("Le groupe " . $groupe->name . " a été créé.");
+        return redirect()->route('FicheGroupe',['id' => $groupe->id]);
     }
 
     public function afficher($id)
     {
         $groupe = $this->groupeRepository->getById($id);
 
-        return view('FicheGroupe',  compact('groupe'));
+        return view('Groupe\FicheGroupe',  compact('groupe'));
     }
 
     public function modifier($id)
     {
         $groupe = $this->groupeRepository->getById($id);
 
-        return view('edit',  compact('groupe'));
+        return view('Groupe\ModifierGroupe',  compact('groupe'));
     }
 
     public function mettreAJour(GroupeUpdateRequest $request, $id)
     {
         $this->groupeRepository->update($id, $request->all());
 
-        return redirect('groupe')->withOk("Le groupe " . $request->input('name') . " a été modifié.");
+        return redirect()->route('FicheGroupe',['id' => $id]);
     }
 
     public function supprimer($id)
     {
         $this->groupeRepository->destroy($id);
 
-        return back();
+        return redirect()->route('Groupes');
     }
 }

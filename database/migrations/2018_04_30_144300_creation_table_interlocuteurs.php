@@ -15,14 +15,14 @@ class CreationTableInterlocuteurs extends Migration
     {
         Schema::create('interlocuteurs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('prenom');
+            $table->string('prenom')->nullable();
             $table->string('nom');
-            $table->string('civilite');
-            $table->string('fonction');
-            $table->string('telFixe');
-            $table->string('telMobile');
-            $table->string('mail');
-            $table->text('commentaire');
+            $table->string('civilite')->nullable();
+            $table->string('fonction')->nullable();
+            $table->string('telFixe')->nullable();
+            $table->string('telMobile')->nullable();
+            $table->string('mail')->nullable();
+            $table->text('commentaire')->nullable();
             $table->boolean('transmission');
             $table->timestamps();
         });

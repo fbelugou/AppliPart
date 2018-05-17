@@ -16,26 +16,26 @@
         </a>
       	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       		<ul class="navbar-nav ml-md-auto">
-      			<li class="nav-item active">
+      			<li class="nav-item">
       				 <a class="nav-link active" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Groupes') }}">Groupes</a>
+      				 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+      				 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
+      				 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
-               <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+               <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
             </li>
             <li class="nav-item">
       				 <span class="navbar-text">Utilisateur : XX</span>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('logout') }}">Déconnexion</a>
+      				 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
       			</li>
       		</ul>
       	</div>
