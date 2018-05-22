@@ -30,8 +30,8 @@ class EntrepriseRepository
         $entreprise->siteWeb=$inputs['siteWeb'];
         $entreprise->telephone=$inputs['telephone'];
         $entreprise->commentaire=$inputs['commentaire'];
-        if($inputs['groupe_id']!=0){
-            $entreprise->groupe_id=$inputs['groupe_id'];
+        if($inputs['groupe']!=0){
+            $entreprise->groupe_id=$inputs['groupe'];
         }
         $entreprise->save();
         if(isset($inputs['activites'])){

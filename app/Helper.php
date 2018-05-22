@@ -26,3 +26,20 @@ function dernierContact($entreprise)
         }
     }
 }
+
+function contacts($entreprise)
+{
+    $contacts=array();
+    $i=0;
+    foreach($entreprise->interlocuteurs as $in){
+        if(isset($in->pivot->objet)){
+            $contacts[$i]['contactAMIO']=$in->pivot->contactAMIO;
+            $contacts[$i]['date']=$in->pivot->date;
+            $contacts[$i]['objet']=$in->pivot->objet;
+            $contacts[$i]['commentaire']=$in->pivot->commentaire;
+            $contacts[$i]['id']=$in->pivot->id;
+            $i++;
+        }
+    }
+    return $contacts;
+}

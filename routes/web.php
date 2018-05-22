@@ -32,14 +32,19 @@ Route::delete( '/Interlocuteurs/{id}',      ['as' => 'InterlocuteurSupprimer',  
 Route::get( '/Interlocuteurs/{id}/Modifier',['as' => 'InterlocuteurModifier',     'uses' => 'InterlocuteurController@modifier']);
 
 
-
-Route::get( '/Actions',                     ['as' => 'Actions',                   'uses' => 'GestionController@listerActions']);
-Route::get( '/Actions/{id}',                ['as' => 'FicheAction',               'uses' => 'GestionController@ficheAction']);
+Route::get( '/Actions',                     ['as' => 'Actions',                   'uses' => 'ActionController@lister']);
+Route::get( '/Actions/Ajout',               ['as' => 'ActionAjout',               'uses' => 'ActionController@ajouter']);
+Route::get( '/Actions/{id}',                ['as' => 'FicheAction',               'uses' => 'ActionController@afficher']);
+Route::post('/Actions',                     ['as' => 'ActionEnregistrer',         'uses' => 'ActionController@enregistrer']);
+Route::put( '/Actions/{id}',                ['as' => 'ActionMAJ',                 'uses' => 'ActionController@mettreAJour']);
+Route::delete( '/Actions/{id}',             ['as' => 'ActionSupprimer',           'uses' => 'ActionController@supprimer']);
+Route::get( '/Actions/{id}/Ajout',          ['as' => 'ActionAjoutEntreprise',     'uses' => 'ActionController@ajouterEnt']);
+Route::get( '/Actions/{id}/Modifier',       ['as' => 'ActionModifier',            'uses' => 'ActionController@modifier']);
 
 
 Route::get( '/Partenaires',                 ['as' => 'Partenaires',               'uses' => 'EntrepriseController@listerPartenaires']);
 Route::get( '/Entreprises',                 ['as' => 'Entreprises',               'uses' => 'EntrepriseController@listerEntreprises']);
-Route::post('/Entreprises',                 ['as' => 'EntrepriseEnregistrer',      'uses' => 'EntrepriseController@enregistrer']);
+Route::post('/Entreprises',                 ['as' => 'EntrepriseEnregistrer',     'uses' => 'EntrepriseController@enregistrer']);
 Route::get( '/Entreprises/Ajout',           ['as' => 'EntrepriseAjout',           'uses' => 'EntrepriseController@ajouter']);
 Route::get( '/Entreprises/{id}',            ['as' => 'FicheEntreprise',           'uses' => 'EntrepriseController@afficher']);
 Route::put( '/Entreprises/{id}',            ['as' => 'EntrepriseMAJ',             'uses' => 'EntrepriseController@mettreAJour']);
@@ -47,7 +52,15 @@ Route::delete( '/Entreprises/{id}',         ['as' => 'EntrepriseSupprimer',     
 Route::get( '/Entreprises/{id}/Modifier',   ['as' => 'EntrepriseModifier',        'uses' => 'EntrepriseController@modifier']);
 
 
-Route::get( '/Contacts/{id}',               ['as' => 'FicheContact',              'uses' => 'GestionController@ficheContact']);
+//Route::get( '/Contacts',                    ['as' => 'Contacts',                  'uses' => 'ContactController@lister']);
+Route::get( '/Contacts/{id}',               ['as' => 'FicheContact',              'uses' => 'ContactController@afficher']);
+Route::post('/Contacts',                    ['as' => 'ContactEnregistrer',        'uses' => 'ContactController@enregistrer']);
+Route::put( '/Contacts/{id}',               ['as' => 'ContactMAJ',                'uses' => 'ContactController@mettreAJour']);
+Route::delete( '/Contacts/{id}',            ['as' => 'ContactSupprimer',          'uses' => 'ContactController@supprimer']);
+Route::get( '/Contacts/{id}/Ajout',         ['as' => 'ContactAjout',              'uses' => 'ContactController@ajouter']);
+Route::get( '/Contacts/{id}/Modifier',      ['as' => 'ContactModifier',           'uses' => 'ContactController@modifier']);
+
+
 Route::get( '/Badges',                      ['as' => 'Badges',                    'uses' => 'GestionController@genererBadges']);
 Route::post('/Recherche/Actions',           ['as' => 'rechercheActions',          'uses' => 'GestionController@index']);
 Route::post('/Recherche/Groupes',           ['as' => 'rechercheGroupes',          'uses' => 'GestionController@index']);

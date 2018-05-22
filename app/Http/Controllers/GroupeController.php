@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Repositories\GroupeRepository;
+use App\Repositories\EntrepriseRepository;
 
 use App\Http\Requests\GroupeCreateRequest;
 use App\Http\Requests\GroupeUpdateRequest;
@@ -15,10 +16,12 @@ use App\Http\Controllers\Controller;
 class GroupeController extends Controller
 {
     protected $groupeRepository;
+    protected $entrepriseRepository;
 
-    public function __construct(groupeRepository $groupeRepository)
+    public function __construct(groupeRepository $groupeRepository,EntrepriseRepository $entrepriseRepository)
     {
         $this->groupeRepository = $groupeRepository;
+        $this->entrepriseRepository = $entrepriseRepository;
     }
 
     public function lister()
@@ -63,6 +66,11 @@ class GroupeController extends Controller
 
     public function supprimer($id)
     {
+        $groupe = $this->groupeRepository->getById($id);
+        foreach($groupe->entreprises() as $entreprise){
+            $this->EntrepriseRepository->destroy($entreprise->id);
+        }
+
         $this->groupeRepository->destroy($id);
 
         return redirect()->route('Groupes');

@@ -9,6 +9,9 @@ use App\Repositories\GroupeRepository;
 use App\Repositories\ActiviteRepository;
 use App\Repositories\FiliereRepository;
 use App\Repositories\InterlocuteurRepository;
+use App\Repositories\EntrepriseEventRepository;
+use App\Repositories\ActionRepository;
+use App\Repositories\coordonneesRepository;
 
 use App\Http\Requests\EntrepriseCreateRequest;
 use App\Http\Requests\EntrepriseUpdateRequest;
@@ -23,18 +26,27 @@ class EntrepriseController extends Controller
     protected $activiteRepository;
     protected $filiereRepository;
     protected $interlocuteurRepository;
+    protected $evenementRepository;
+    protected $actionRepository;
+    protected $coordonneesRepository;
 
       public function __construct(EntrepriseRepository $entrepriseRepository,
                                   GroupeRepository $groupeRepository,
                                   ActiviteRepository $activiteRepository,
                                   FiliereRepository $filiereRepository,
-                                  InterlocuteurRepository $interlocuteurRepository)
+                                  InterlocuteurRepository $interlocuteurRepository,
+                                  EntrepriseEventRepository $evenementRepository,
+                                  ActionRepository $actionRepository,
+                                  coordonneesRepository $coordonneesRepository)
     {
         $this->entrepriseRepository = $entrepriseRepository;
         $this->groupeRepository = $groupeRepository;
         $this->activiteRepository = $activiteRepository;
         $this->filiereRepository = $filiereRepository;
         $this->interlocuteurRepository = $interlocuteurRepository;
+        $this->evenementRepository = $evenementRepository;
+        $this->actionRepository = $actionRepository;
+        $this->coordonneesRepository = $coordonneesRepository;
     }
 
     public function listerEntreprises()
@@ -120,13 +132,28 @@ class EntrepriseController extends Controller
     public function mettreAJour(EntrepriseUpdateRequest $request, $id)
     {
         $this->entrepriseRepository->update($id, $request->all());
-        return redirect()->route('FicheInterlocuteur',['id' => $id]);
+        return redirect()->route('FicheEntreprise',['id' => $id]);
     }
 
     public function supprimer($id)
     {
+        $entreprise = $this->entrepriseRepository->getById($id);
+        $entreprise->interlocuteurs()->detach();
+        $entreprise->filieres()->detach();
+        $entreprise->activites()->detach();
+        foreach($entreprise->evenements() as $evenement){
+            $this->evenementRepository->destroy($evenement->id);
+        }
+        foreach($entreprise->actions() as $action){
+            $this->actionRepository->destroy($action->id);
+        }
+        foreach($entreprise->coordonnees() as $coord){
+            $this->coordonneesRepository->destroy($coord->id);
+        }
+
+
         $this->entrepriseRepository->destroy($id);
 
-        return view('Accueil');
+        return Redirect()->route('Accueil');
     }
 }

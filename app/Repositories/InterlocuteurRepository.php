@@ -54,9 +54,12 @@ class InterlocuteurRepository
   		  return $this->interlocuteur->orderBy('nom','asc')->get();
   	}
 
-    public function getInterlocuteursId()
+    public function getInterlocuteursByEntreprise($id)
   	{
-  		  return $this->interlocuteur->orderBy('id','asc')->get();
+  		  return $this->interlocuteur->join('contacts','interlocuteurs.id','=','contacts.interlocuteur_id')
+                                    ->where('contacts.entreprise_id','=',$id)
+                                    ->orderBy('nom','asc')
+                                    ->get();
   	}
 
     public function getInterlocuteursMail()

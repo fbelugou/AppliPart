@@ -27,11 +27,6 @@ class GroupeRepository
   		  return $this->groupe->orderBy('nom','asc')->get();
   	}
 
-    public function getGroupesId()
-  	{
-  		  return $this->groupe->orderBy('id','asc')->get();
-  	}
-
   	public function store(Array $inputs)
   	{
     		$groupe = new $this->groupe;

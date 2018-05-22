@@ -17,7 +17,7 @@ class CreationTableActions extends Migration
             $table->increments('id');
             $table->string('nature');
             $table->date('date');
-            $table->text('commentaire');
+            $table->text('commentaire')->nullable();
             $table->unsignedInteger('entreprise_id')->nullable();
             $table->foreign('entreprise_id')->references('id')->on('entreprises')
                 ->onDelete('restrict')

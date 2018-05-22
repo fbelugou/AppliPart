@@ -95,8 +95,8 @@
 					<tr>
 						<td>Interlocuteur(s) :</td>
 						<td>
-							@foreach($entreprise->Interlocuteurs as $interlocuteur)
-								 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->id ]) }}">{{  $interlocuteur->prenom  }}  {{ $interlocuteur->nom }}</a><br>
+							@foreach($entreprise->Interlocuteurs->GroupBy('id') as $interlocuteur)
+								 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->first()->id ]) }}">{{  $interlocuteur->first()->prenom  }}  {{ $interlocuteur->first()->nom }}</a><br>
 							@endforeach
 						</td>
 					</tr>
@@ -106,14 +106,76 @@
 					</tr>
 				</tbody>
 			</table>
-    </div>
+		</div>
 		<div class="col-sm-3">
 			{{ link_to_route('EntrepriseModifier', 'Modifier', ['id' => $entreprise->id ],['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['EntrepriseSupprimer', $entreprise->id]]) !!}
 					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette entreprise ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
-  </div>
+	</div>
+		<div class="row">
+			<div class="col-sm-3">
+			</div>
+			<div class="col-sm-1">
+				Contacts
+			</div>
+			<div class="col-sm-5">
+				@if(!empty(contacts($entreprise)))
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<th style="width:10%;">Contact </th>
+							<th style="width:20%;">Date </th>
+							<th style="width:15%;">Objet </th>
+							<th style="width:55%;">Commentaire </th>
+						</thead>
+						<tbody>
+							@foreach(contacts($entreprise) as $contact)
+							<tr>
+								 <td>{{ $contact['contactAMIO'] }}</td>
+								 <td><a class="text-dark" href="{{ route('FicheContact',[ 'id' => $contact['id'] ]) }}">{{ date_create($contact['date'])->format('d/m/Y') }}</a></td>
+								 <td><a class="text-dark" href="{{ route('FicheContact',[ 'id' => $contact['id'] ]) }}">{{ $contact['objet'] }}</a></td>
+								 <td>{{ substr($contact['commentaire'],1,50) }}...</td>
+							 </tr>
+							@endforeach
+						</tbody>
+					</table>
+				@endif
+			</div>
+			<div class="col-sm-3">
+				{{ link_to_route('ContactAjout', 'Ajouter un contact', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			</div>
+	  </div>
+		<div class="row">
+			<div class="col-sm-3">
+			</div>
+			<div class="col-sm-1">
+					Actions
+			</div>
+			<div class="col-sm-5">
+				@if(!empty($entreprise->Actions->first()))
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<th style="width:25%;">Nature </th>
+							<th style="width:20%;">Date </th>
+							<th style="width:55%;">Commentaire </th>
+						</thead>
+						<tbody>
+							@foreach($entreprise->Actions as $action)
+							<tr>
+								 <td><a class="text-dark" href="{{ route('FicheAction',[ 'id' => $action->id ]) }}">{{ $action->nature }}</a></td>
+								 <td>{{ date_create($action['date'])->format('d/m/Y') }}</td>
+								 <td>{{ substr($action->commentaire,1,50) }}...</td>
+							 </tr>
+							@endforeach
+						</tbody>
+					</table>
+				@endif
+			</div>
+			<div class="col-sm-3">
+				{{ link_to_route('ActionAjoutEntreprise', 'Ajouter une action', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			</div>
+	  </div>
 </div>
 
 @endsection

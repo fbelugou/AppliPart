@@ -33,7 +33,7 @@ class InterlocuteurController extends Controller
 
     public function ajouter()
     {
-        $entreprises[0]='Choisissez un interlocuteur';
+        $entreprises[0]='Choisissez une entreprise';
         $tabEntreprises = $this->entrepriseRepository->getEntreprises();
         foreach ($tabEntreprises as $entreprise) {
             $entreprises[$entreprise->id]=$entreprise->nom;
@@ -57,7 +57,7 @@ class InterlocuteurController extends Controller
 
     public function modifier($id)
     {
-        $entreprises[0]='Choisissez un interlocuteur';
+        $entreprises[0]='Choisissez une entreprise';
         $tabEntreprises = $this->entrepriseRepository->getEntreprises();
         foreach ($tabEntreprises as $entreprise) {
             $entreprises[$entreprise->id]=$entreprise->nom;
