@@ -14,26 +14,50 @@ class CoordonneesRepository
   		  $this->coordonnees = $coordonnees;
   	}
 
-  	private function save(Coordonnees $coordonnees, Array $inputs)
+  	private function save(Coordonnees $coordonnees, $adresse)
   	{
-        $coordonnees->nom=$inputs['nom'];
-        $coordonnees->taille=$inputs['taille'];
-
-    		$coordonnees->save();
+        $reponse = $this->geocode($adresse);
+        if($reponse[0]){
+            $coordonnees->latitude=$reponse[1][0];
+            $coordonnees->longitude=$reponse[1][1];
+            $coordonnees->save();
+            return true;
+        }
+        else{
+            return $reponse;
+        }
   	}
 
-  	public function getCoordonneess()
-  	{
-  		  return $this->coordonnees->orderBy('nom','asc')->get();
-  	}
+    function geocode($adresse){
+        $adresse = urlencode($adresse);
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$adresse}&key=AIzaSyDKqiesIRLrmUccoTVliXF5aGH9qUPuCgA";
+        $resp_json = file_get_contents($url,false,stream_context_create(["ssl"=>["verify_peer"=>false,"verify_peer_name"=>false]]));
+        $resp = json_decode($resp_json, true);
+        if($resp['status']=='OK'){
+            $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
+            $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
+            $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
+            if($lati && $longi && $formatted_address){
+                $data_arr = array();
+                array_push($data_arr,$lati,$longi,$formatted_address);
+                return [true,$data_arr];
+            }
+            else{
+                return [false];
+            }
+        }
+        else{
+            return [false,"Erreur: {$resp['status']}"];
+        }
+    }
 
-  	public function store(Array $inputs)
+  	public function store($adresse)
   	{
     		$coordonnees = new $this->coordonnees;
 
-    		$this->save($coordonnees, $inputs);
+    		$res = $this->save($coordonnees, $adresse);
 
-    		return $coordonnees;
+    		return [$coordonnees,$res];
   	}
 
   	public function getById($id)

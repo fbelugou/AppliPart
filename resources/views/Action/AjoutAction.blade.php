@@ -74,6 +74,7 @@
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('entreprise', 'Entreprise :') }}
 						{{ Form::select('entreprise', $entreprises ,(isset($entreprise_id)? $entreprise_id : null ),['class' => 'form-control']) }}
+						{!! $errors->first('entreprise', '<small class="form-text text-muted">:message</small>') !!}
 					</div>
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('commentaire', 'Commentaire :') }}

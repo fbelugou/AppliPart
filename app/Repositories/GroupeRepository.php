@@ -51,4 +51,25 @@ class GroupeRepository
   		  $this->getById($id)->delete();
   	}
 
+    public function search(Array $inputs)
+    {
+        if($inputs['limiteGrp']=='true'){
+            $tabGroupes= $this->groupe->where('nom','like','%'.$inputs['grp'].'%')->orderBy('nom','asc')->get();
+            $groupes=array();
+            foreach($tabGroupes as $groupe){
+                foreach($groupe->entreprises as $entreprise){
+                    if($entreprise->partenaireRegulier){
+                        if(!in_array($groupe,$groupes)){
+                            $groupes[]=$groupe;
+                        }
+                    }
+                }
+            }
+            return $groupes;
+        }
+        else{
+            return $this->groupe->where('nom','like','%'.$inputs['grp'].'%')->orderBy('nom','asc')->get();
+        }
+    }
+
 }

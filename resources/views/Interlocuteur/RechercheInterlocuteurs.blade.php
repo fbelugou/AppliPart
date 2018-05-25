@@ -20,13 +20,13 @@
       				 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+      				 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
       				 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
-               <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+               <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
             </li>
             <li class="nav-item">
       				 <span class="navbar-text">Utilisateur : XX</span>
@@ -41,7 +41,7 @@
 	</div>
   <div class="row">
 		<div class="col-md-12">
-      <h3 class="text-center" style="margin-top:1rem;">Liste des entreprises</h3>
+      <h3 class="text-center" style="margin-top:1rem;">Résultats de recherche des interlocuteurs</h3>
     </div>
   </div>
   <div class="row">
@@ -53,36 +53,29 @@
 				  <thead class="thead-light">
 				    <tr>
 				      <th scope="col">Entreprise</th>
-				      <th scope="col">Groupe</th>
-				      <th scope="col">Actions</th>
-				      <th scope="col">Interlocuteurs</th>
-				      <th scope="col">Date du dernier contact</th>
+				      <th scope="col">Prenom</th>
+				      <th scope="col">Nom</th>
+				      <th scope="col">Civilité</th>
+				      <th scope="col">Fonction</th>
+							<th scope="col">Mail : <a class="dark-text" href="{{ route('listeMail') }}">liste à copier</a></th>
+							<th scope="col">Téléphone</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-						@foreach($entreprises as $entreprise)
+						{!! Session::put('interlocuteurs', $interlocuteurs) !!}
+						@foreach($interlocuteurs as $interlocuteur)
 						<tr>
-							<td> <a href="{{ route('FicheEntreprise',['id' => $entreprise->id] ) }}" class="text-dark"> {{ $entreprise->nom }} </a> </td>
-							<td> <a href="{{ route('FicheGroupe',['id' => is_null($entreprise->groupe)? ' ' : $entreprise->groupe->id ])}}" class="text-dark">{{ is_null($entreprise->groupe)? ' ' : $entreprise->groupe->nom }} </a></td>
 							<td>
-								@if (!is_null($entreprise->actions))
-									@foreach($entreprise->actions->GroupBy('nature') as $action)
-										<a href="{{ route('FicheAction',[ 'id' => $action->first()->id ]) }}" class="text-dark" >{{$action->first()->nature}}</a><br/>
-									@endforeach
-								@endif
+								@foreach($interlocuteur->entreprises->GroupBy('id') as $entreprise)
+									<a href="{{ route('FicheEntreprise',['id' => $entreprise->first()->id] ) }}" class="text-dark"> {{ $entreprise->first()->nom }} </a> <br>
+								@endforeach
 							</td>
-							<td>
-								@if (!is_null($entreprise->interlocuteurs))
-									@foreach($entreprise->Interlocuteurs->GroupBy('id') as $interlocuteur)
-										 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->first()->id ]) }}">{{  $interlocuteur->first()->prenom  }}  {{ $interlocuteur->first()->nom }}</a><br>
-									@endforeach
-								@endif
-							</td>
-							<td>
-								@if (!empty($entreprise->interlocuteurs))
-									{!! dernierContact($entreprise) !!}
-									@endif
-							</td>
+							<td> <a href="{{ route('FicheInterlocuteur',['id' => $interlocuteur->id ])}}" class="text-dark">{{ $interlocuteur->prenom }} </a></td>
+							<td> <a href="{{ route('FicheInterlocuteur',['id' => $interlocuteur->id ])}}" class="text-dark">{{ $interlocuteur->nom }} </a></td>
+							<td>{{ $interlocuteur->civilite }}</td>
+							<td>{{ $interlocuteur->fonction }}</td>
+							<td>{{ $interlocuteur->mail }}</td>
+							<td>{{ $interlocuteur->telMobile }}</td>
 				    </tr>
 						@endforeach
 				  </tbody>
@@ -90,7 +83,7 @@
 			</div>
     </div>
 		<div class="col-sm-2">
-			{{ link_to_route('EntrepriseAjout', 'Ajouter une entreprise', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ link_to_route('InterlocuteurAjout', 'Ajouter un interlocuteur', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
 		</div>
   </div>
 </div>

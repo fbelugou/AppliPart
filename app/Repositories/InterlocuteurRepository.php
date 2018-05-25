@@ -62,9 +62,8 @@ class InterlocuteurRepository
                                     ->get();
   	}
 
-    public function getInterlocuteursMail()
+    public function getInterlocuteursMail($interlocuteurs)
   	{
-        $interlocuteurs=$this->interlocuteur->orderBy('mail','asc')->get();
         foreach ($interlocuteurs as $interlocuteur) {
           $mails[]=$interlocuteur->mail;
         }
@@ -93,6 +92,27 @@ class InterlocuteurRepository
   	public function destroy($id)
   	{
   		  $this->getById($id)->delete();
+  	}
+
+    public function search(Array $inputs)
+  	{
+        if($inputs['limiteInt']=='true'){
+            $tabInterlocuteurs= $this->interlocuteur->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$inputs['int']."%'")->orWhere('nom','like','%'.$inputs['int'].'%')->orWhere('prenom','like','%'.$inputs['int'].'%')->orderBy('nom','asc')->get();
+            $interlocuteurs=array();
+            foreach($tabInterlocuteurs as $interlocuteur){
+                foreach($interlocuteur->entreprises as $entreprise){
+                    if($entreprise->partenaireRegulier){
+                        if(!in_array($interlocuteur,$interlocuteurs)){
+                            $interlocuteurs[]=$interlocuteur;
+                        }
+                    }
+                }
+            }
+            return $interlocuteurs;
+        }
+        else{
+            return $this->interlocuteur->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$inputs['int']."%'")->orWhere('nom','like','%'.$inputs['int'].'%')->orWhere('prenom','like','%'.$inputs['int'].'%')->orderBy('nom','asc')->get();
+        }
   	}
 
 }

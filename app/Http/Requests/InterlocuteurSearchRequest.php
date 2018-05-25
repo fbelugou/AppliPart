@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ActionCreateRequest extends FormRequest
+class InterlocuteurSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,7 @@ class ActionCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nature' => Rule::notIn([0]),
-            'date' => 'required|date',
-            'commentaire' => 'max:65000',
-            'entreprise' => Rule::notIn([0]),
+          'int' => 'required'
         ];
     }
 }

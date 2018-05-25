@@ -73,7 +73,7 @@
   				</div>
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('filieres', 'Filiere(s) :') }}
-            {{ Form::select('filieres', $activites ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'filieres[]']) }}
+            {{ Form::select('filieres', $filieres ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'filieres[]']) }}
 						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs filières </small>
   				</div>
           <div class="form-group" style="margin-top:10px;">

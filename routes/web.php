@@ -16,7 +16,7 @@ Route::get( '/',                            ['as' => 'Accueil',                 
 Route::get( '/Groupes',                     ['as' => 'Groupes',                   'uses' => 'GroupeController@lister']);
 Route::get( '/Groupes/Ajout',               ['as' => 'GroupeAjout',               'uses' => 'GroupeController@ajouter']);
 Route::get( '/Groupes/{id}',                ['as' => 'FicheGroupe',               'uses' => 'GroupeController@afficher']);
-Route::post('/Groupes',                     ['as' => 'GroupeEnregistrer',          'uses' => 'GroupeController@enregistrer']);
+Route::post('/Groupes',                     ['as' => 'GroupeEnregistrer',         'uses' => 'GroupeController@enregistrer']);
 Route::put( '/Groupes/{id}',                ['as' => 'GroupeMAJ',                 'uses' => 'GroupeController@mettreAJour']);
 Route::delete( '/Groupes/{id}',             ['as' => 'GroupeSupprimer',           'uses' => 'GroupeController@supprimer']);
 Route::get( '/Groupes/{id}/Modifier',       ['as' => 'GroupeModifier',            'uses' => 'GroupeController@modifier']);
@@ -51,8 +51,9 @@ Route::put( '/Entreprises/{id}',            ['as' => 'EntrepriseMAJ',           
 Route::delete( '/Entreprises/{id}',         ['as' => 'EntrepriseSupprimer',       'uses' => 'EntrepriseController@supprimer']);
 Route::get( '/Entreprises/{id}/Modifier',   ['as' => 'EntrepriseModifier',        'uses' => 'EntrepriseController@modifier']);
 
-
-//Route::get( '/Contacts',                    ['as' => 'Contacts',                  'uses' => 'ContactController@lister']);
+/*
+Route::get( '/Contacts',                    ['as' => 'Contacts',                  'uses' => 'ContactController@lister']);
+*/
 Route::get( '/Contacts/{id}',               ['as' => 'FicheContact',              'uses' => 'ContactController@afficher']);
 Route::post('/Contacts',                    ['as' => 'ContactEnregistrer',        'uses' => 'ContactController@enregistrer']);
 Route::put( '/Contacts/{id}',               ['as' => 'ContactMAJ',                'uses' => 'ContactController@mettreAJour']);
@@ -62,32 +63,13 @@ Route::get( '/Contacts/{id}/Modifier',      ['as' => 'ContactModifier',         
 
 
 Route::get( '/Badges',                      ['as' => 'Badges',                    'uses' => 'GestionController@genererBadges']);
-Route::post('/Recherche/Actions',           ['as' => 'rechercheActions',          'uses' => 'GestionController@index']);
-Route::post('/Recherche/Groupes',           ['as' => 'rechercheGroupes',          'uses' => 'GestionController@index']);
-Route::post('/Recherche/Entreprises',       ['as' => 'rechercheEntreprises',      'uses' => 'GestionController@index']);
-Route::post('/Recherche/Interlocuteurs',    ['as' => 'rechercheInterlocuteurs',   'uses' => 'GestionController@index']);
-Route::post('/Recherche/EntreprisesDist',   ['as' => 'rechercheEntreprisesDist',  'uses' => 'GestionController@index']);
+Route::post('/Recherche/Actions',           ['as' => 'rechercheActions',          'uses' => 'ActionController@recherche']);
+Route::post('/Recherche/Groupes',           ['as' => 'rechercheGroupes',          'uses' => 'GroupeController@recherche']);
+Route::post('/Recherche/Entreprises',       ['as' => 'rechercheEntreprises',      'uses' => 'EntrepriseController@recherche']);
+Route::post('/Recherche/Interlocuteurs',    ['as' => 'rechercheInterlocuteurs',   'uses' => 'InterlocuteurController@recherche']);
+Route::post('/Recherche/EntreprisesDist',   ['as' => 'rechercheEntreprisesDist',  'uses' => 'EntrepriseController@rechercheDist']);
 
 //Route::resource('entreprise', 'EntrepriseController');
-
-/*
-| POST      | entreprise                    | entreprise.store         | App\Http\Controllers\EntrepriseController@store           | web
-| GET|HEAD  | entreprise                    | entreprise.index         | App\Http\Controllers\EntrepriseController@index           | web
-| GET|HEAD  | entreprise/create             | entreprise.create        | App\Http\Controllers\EntrepriseController@create          | web
-| DELETE    | entreprise/{entreprise}       | entreprise.destroy       | App\Http\Controllers\EntrepriseController@destroy         | web
-| PUT|PATCH | entreprise/{entreprise}       | entreprise.update        | App\Http\Controllers\EntrepriseController@update          | web
-| GET|HEAD  | entreprise/{entreprise}       | entreprise.show          | App\Http\Controllers\EntrepriseController@show            | web
-| GET|HEAD  | entreprise/{entreprise}/edit  | entreprise.edit          | App\Http\Controllers\EntrepriseController@edit            | web
-
-------------------------------------------------------------------------
-
-    Route::get( 'contact', 'GestionController@getInfos');
-    Route::post('contact', 'GestionController@postInfos');
-    return Response::make('texte', 200);
-    return view('article',['numero' => $n]);
-    return view('article')->withNumero($n);
-    return view('article')->with('numero', $n);
-*/
 
 Auth::routes();
 

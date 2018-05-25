@@ -4,18 +4,22 @@ namespace App\Repositories;
 
 use App\Entreprise;
 use App\Repositories\GroupeRepository;
+use App\Repositories\CoordonneesRepository;
 
 class EntrepriseRepository
 {
 
     protected $entreprise;
     protected $groupeRepository;
+    protected $coordonneesRepository;
 
     public function __construct(Entreprise $entreprise,
-                                GroupeRepository $groupeRepository)
+                                GroupeRepository $groupeRepository,
+                                coordonneesRepository $coordonneesRepository)
   	{
   		  $this->entreprise = $entreprise;
         $this->groupeRepository = $groupeRepository;
+        $this->coordonneesRepository = $coordonneesRepository;
   	}
 
   	private function save(Entreprise $entreprise, Array $inputs)
@@ -32,6 +36,11 @@ class EntrepriseRepository
         $entreprise->commentaire=$inputs['commentaire'];
         if($inputs['groupe']!=0){
             $entreprise->groupe_id=$inputs['groupe'];
+        }
+        $adresse = $entreprise->rue.' '.$entreprise->cp.' '.$entreprise->ville;
+        $resultat=$this->coordonneesRepository->store($adresse);
+        if($resultat[1]){
+            $entreprise->coordonnees_id=$resultat[0]->id;
         }
         $entreprise->save();
         if(isset($inputs['activites'])){
@@ -71,12 +80,65 @@ class EntrepriseRepository
 
   	public function update($id, Array $inputs)
   	{
-  		  $this->save($this->getById($id), $inputs);
+        $ent=$this->getById($id);
+        if(!is_null($ent->coordonnees)){
+            $ent->coordonnees->delete();
+        }
+  		  $this->save($ent, $inputs);
   	}
 
     public function destroy($id)
   	{
   		  $this->getById($id)->delete();
+  	}
+
+    public function search(Array $inputs)
+  	{
+        if($inputs['limiteEnt'] == "true"){
+            return $this->entreprise->where('nom','like','%'.$inputs['ent'].'%')->where('partenaireRegulier','=',1)->get();
+        }
+        else{
+            return $this->entreprise->where('nom','like','%'.$inputs['ent'].'%')->get();
+        }
+  	}
+
+    public function searchDist(Array $inputs)
+  	{
+        if($inputs['limiteEntDist'] == "true"){
+            $tabEntreprises = $this->entreprise->where('partenaireRegulier','=',1)->get();
+        }
+        else{
+            $tabEntreprises = $this->entreprise->get();
+        }
+        $resultat = $this->coordonneesRepository->geocode($inputs['ville']);
+
+        if($resultat[1]){
+            $longVille     = $resultat[1][1]*(M_PI/180);
+            $latVille     = $resultat[1][0]*(M_PI/180);
+
+            foreach ($tabEntreprises as $entreprise) {
+                if(isset($entreprise->coordonnees)){
+                    $longEnt = $entreprise->coordonnees->longitude*(M_PI/180);
+                    $latEnt  = $entreprise->coordonnees->latitude*(M_PI/180);
+
+                    $subEntVille   = bcsub ($longEnt, $longVille, 20);
+                    $cosLatVille = cos($latVille);
+                    $cosLatEnt = cos($latEnt);
+                    $sinLatVille = sin($latVille);
+                    $sinLatEnt = sin($latEnt);
+
+                    $distance = 6371*acos($cosLatVille*$cosLatEnt*cos($subEntVille)+$sinLatVille*$sinLatEnt);
+
+                    if($distance<=$inputs['dist']){
+                      $entreprises[]=$entreprise;
+                    }
+                }
+            }
+            return $entreprises;
+        }
+        elseif(isset($resultat[1])){
+            return view('Erreur',  ['message'=>$resultat[1]]);
+        }
   	}
 
 }

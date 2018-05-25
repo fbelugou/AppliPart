@@ -9,6 +9,7 @@ use App\Repositories\EntrepriseRepository;
 
 use App\Http\Requests\GroupeCreateRequest;
 use App\Http\Requests\GroupeUpdateRequest;
+use App\Http\Requests\GroupeSearchRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -74,5 +75,12 @@ class GroupeController extends Controller
         $this->groupeRepository->destroy($id);
 
         return redirect()->route('Groupes');
+    }
+
+    public function recherche(GroupeSearchRequest $request)
+    {
+        $groupes = $this->groupeRepository->search($request->all());
+
+        return view('Groupe\RechercheGroupes',  compact('groupes'));
     }
 }

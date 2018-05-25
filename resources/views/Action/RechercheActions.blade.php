@@ -1,10 +1,12 @@
 @extends('vueMere')
 
+
 @section('contenu')
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
       <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+
       	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       		<span class="navbar-toggler-icon"></span>
       	</button>
@@ -20,10 +22,10 @@
       				 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+      				 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
       			</li>
             <li class="nav-item">
-      				 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
+      				 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
       			</li>
             <li class="nav-item">
                <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
@@ -41,7 +43,7 @@
 	</div>
   <div class="row">
 		<div class="col-md-12">
-      <h3 class="text-center" style="margin-top:1rem;">Liste des entreprises</h3>
+      <h3 class="text-center" style="margin-top:1rem;">Résultats de recherche pour les actions : {{ $actions->first()->nature }}</h3>
     </div>
   </div>
   <div class="row">
@@ -53,36 +55,16 @@
 				  <thead class="thead-light">
 				    <tr>
 				      <th scope="col">Entreprise</th>
-				      <th scope="col">Groupe</th>
-				      <th scope="col">Actions</th>
-				      <th scope="col">Interlocuteurs</th>
-				      <th scope="col">Date du dernier contact</th>
+				      <th scope="col">Nature</th>
+				      <th scope="col">Date</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-						@foreach($entreprises as $entreprise)
+						@foreach($actions as $action)
 						<tr>
-							<td> <a href="{{ route('FicheEntreprise',['id' => $entreprise->id] ) }}" class="text-dark"> {{ $entreprise->nom }} </a> </td>
-							<td> <a href="{{ route('FicheGroupe',['id' => is_null($entreprise->groupe)? ' ' : $entreprise->groupe->id ])}}" class="text-dark">{{ is_null($entreprise->groupe)? ' ' : $entreprise->groupe->nom }} </a></td>
-							<td>
-								@if (!is_null($entreprise->actions))
-									@foreach($entreprise->actions->GroupBy('nature') as $action)
-										<a href="{{ route('FicheAction',[ 'id' => $action->first()->id ]) }}" class="text-dark" >{{$action->first()->nature}}</a><br/>
-									@endforeach
-								@endif
-							</td>
-							<td>
-								@if (!is_null($entreprise->interlocuteurs))
-									@foreach($entreprise->Interlocuteurs->GroupBy('id') as $interlocuteur)
-										 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->first()->id ]) }}">{{  $interlocuteur->first()->prenom  }}  {{ $interlocuteur->first()->nom }}</a><br>
-									@endforeach
-								@endif
-							</td>
-							<td>
-								@if (!empty($entreprise->interlocuteurs))
-									{!! dernierContact($entreprise) !!}
-									@endif
-							</td>
+							<td> <a href="{{ route('FicheEntreprise',['id' => isset($action->entreprise) ? $action->entreprise->id : ' '] ) }}" class="text-dark"> {{ isset($action->entreprise) ? $action->entreprise->nom : ' ' }} </a> </td>
+							<td> <a href="{{ route('FicheAction',['id' => $action->id ])}}" class="text-dark">{{ $action->nature}} </a> </td>
+							<td> {{ date_create($action->date)->format('d/m/Y') }} </td>
 				    </tr>
 						@endforeach
 				  </tbody>
@@ -90,7 +72,7 @@
 			</div>
     </div>
 		<div class="col-sm-2">
-			{{ link_to_route('EntrepriseAjout', 'Ajouter une entreprise', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ link_to_route('ActionAjout', 'Ajouter une action', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
 		</div>
   </div>
 </div>

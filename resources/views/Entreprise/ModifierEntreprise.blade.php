@@ -53,7 +53,7 @@
 						{!! $errors->first('nom', '<small class="form-text text-muted">:message</small>') !!}
 					</div>
 					<div class="form-group" style="margin-top:10px;">
-						{{ Form::checkbox('partenaireRegulier', null, false, ['class' => 'form-check-input','style' => 'margin-left:5px;']) }}
+						{{ Form::checkbox('partenaireRegulier', null, null, ['class' => 'form-check-input','style' => 'margin-left:5px;']) }}
 						{{ Form::label('partenaireRegulier', 'Partenaire régulier',['class' => 'form-check-label','style' => 'margin-left:30px;']) }}
 					</div>
 					<div class="form-group" style="margin-top:10px;">

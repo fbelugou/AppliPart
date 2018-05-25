@@ -62,11 +62,12 @@
 				    </tr>
 				  </thead>
 				  <tbody>
+						{!! Session::put('interlocuteurs', $interlocuteurs) !!}
 						@foreach($interlocuteurs as $interlocuteur)
 						<tr>
 							<td>
-								@foreach($interlocuteur->entreprises as $entreprise)
-									<a href="{{ route('FicheEntreprise',['id' => $entreprise->id] ) }}" class="text-dark"> {{ $entreprise->nom }} </a> <br>
+								@foreach($interlocuteur->entreprises->GroupBy('id') as $entreprise)
+									<a href="{{ route('FicheEntreprise',['id' => $entreprise->first()->id] ) }}" class="text-dark"> {{ $entreprise->first()->nom }} </a> <br>
 								@endforeach
 							</td>
 							<td> <a href="{{ route('FicheInterlocuteur',['id' => $interlocuteur->id ])}}" class="text-dark">{{ $interlocuteur->prenom }} </a></td>

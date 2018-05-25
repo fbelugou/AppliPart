@@ -11,10 +11,12 @@ use App\Repositories\FiliereRepository;
 use App\Repositories\InterlocuteurRepository;
 use App\Repositories\EntrepriseEventRepository;
 use App\Repositories\ActionRepository;
-use App\Repositories\coordonneesRepository;
+use App\Repositories\CoordonneesRepository;
 
 use App\Http\Requests\EntrepriseCreateRequest;
 use App\Http\Requests\EntrepriseUpdateRequest;
+use App\Http\Requests\EntrepriseSearchRequest;
+use App\Http\Requests\EntrepriseDistSearchRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -155,5 +157,19 @@ class EntrepriseController extends Controller
         $this->entrepriseRepository->destroy($id);
 
         return Redirect()->route('Accueil');
+    }
+
+    public function recherche(EntrepriseSearchRequest $request)
+    {
+        $entreprises=$this->entrepriseRepository->search($request->all());
+
+        return view('Entreprise\RechercheEntreprises',  compact('entreprises'));
+    }
+
+    public function rechercheDist(EntrepriseDistSearchRequest $request)
+    {
+        $entreprises=$this->entrepriseRepository->searchDist($request->all());
+
+        return view('Entreprise\RechercheEntreprises',  compact('entreprises'));
     }
 }

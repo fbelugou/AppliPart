@@ -9,6 +9,7 @@ use App\Repositories\EntrepriseRepository;
 
 use App\Http\Requests\ActionCreateRequest;
 use App\Http\Requests\ActionUpdateRequest;
+use App\Http\Requests\ActionSearchRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -88,5 +89,12 @@ class ActionController extends Controller
         $this->actionRepository->destroy($id);
 
         return redirect()->route('Actions');
+    }
+
+    public function recherche(ActionSearchRequest $request)
+    {
+        $actions = $this->actionRepository->search($request->all());
+
+        return view('Action\RechercheActions',  compact('actions'));
     }
 }

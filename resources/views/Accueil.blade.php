@@ -65,20 +65,7 @@
 						 <a href={{ route('Badges') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Génerer des badges</button></a><br/>
 						 	{{ Form::open(['url' => route('rechercheActions')]) }}
 						 		<div class="form-group">
-									 {{ Form::select('action', [
-										   'Stage' => 'Stage',
-										   'Alternance' => 'Alternance',
-										   'JobDating' => 'JobDating',
-										   'VisiteEntreprise' => 'Visite d\'entreprise',
-										   'TaxeApprentissage' => 'Taxe d\'apprentissage',
-										   'JuryExamen' => 'Jury d\'examen',
-										   'Parrainage' => 'Parrainage',
-										   'InterventionTechnique' => 'Intervention technique',
-										   'FormationStagiaire' => 'Formation stagiaire',
-											 'FormationFormateur' => 'Formation formateur',
-										   'Embauche' => 'Embauche',
-										   'DonMateriel' => 'Don de matériel',
-											 'Autres' => 'Autres']
+									 {{ Form::select('action', ['Choisissez un type d\'action','Stage','Alternance','JobDating','Visite d\'entreprise','Taxe d\'apprentissage','Jury d\'examen','Parrainage','Intervention technique','Formation stagiaire','Formation formateur','Embauche','Don de matériel','Autres']
 										,null, ['class' => 'form-control pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
 								 </div>
 						 	 	 {{ Form::submit('Liste des entreprises par action',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>

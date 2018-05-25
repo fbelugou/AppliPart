@@ -20,13 +20,13 @@
 						 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+						 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
 					</li>
 					<li class="nav-item">
 						 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+						 <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
 					</li>
 					<li class="nav-item">
 						 <span class="navbar-text">Utilisateur : XX</span>
@@ -44,7 +44,7 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;">
-			<h2 class="card-header">Modification d'un groupe</h2>
+			<h2 class="card-header">Liste d'adresses mail</h2>
 			<div class="card-body">
 				{{ implode(',',$mails) }}
 			</div>

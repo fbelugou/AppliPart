@@ -29,7 +29,7 @@ class Entreprise extends Model
 
     public function actions()
   	{
-  		return $this->hasMany('App\Action');
+  		return $this->hasMany('App\Action')->orderBy('date','desc');
   	}
 
     public function evenements()
@@ -54,7 +54,7 @@ class Entreprise extends Model
 
     public function coordonnees()
   	{
-  		return $this->hasOne('App\Coordonnees');
+  		return $this->belongsTo('App\Coordonnees');
   	}
 
     public function groupe()

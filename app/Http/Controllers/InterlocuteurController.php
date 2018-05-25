@@ -9,9 +9,11 @@ use App\Repositories\EntrepriseRepository;
 
 use App\Http\Requests\InterlocuteurCreateRequest;
 use App\Http\Requests\InterlocuteurUpdateRequest;
+use App\Http\Requests\InterlocuteurSearchRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class InterlocuteurController extends Controller
 {
@@ -83,8 +85,15 @@ class InterlocuteurController extends Controller
 
     public function listeMail()
     {
-        $mails = $this->interlocuteurRepository->getInterlocuteursMail();
+        $mails = $this->interlocuteurRepository->getInterlocuteursMail(Session::get('interlocuteurs'));
 
         return view('Interlocuteur\ListeMail',compact('mails'));
+    }
+
+    public function recherche(InterlocuteurSearchRequest $request)
+    {
+        $interlocuteurs = $this->interlocuteurRepository->search($request->all());
+
+        return view('Interlocuteur\RechercheInterlocuteurs',compact('interlocuteurs'));
     }
 }

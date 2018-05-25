@@ -30,7 +30,7 @@ class CreationTableEntreprises extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->unsignedInteger('coord_id')->nullable();
-            $table->foreign('coord_id')->references('id')->on('coordonees')
+            $table->foreign('coord_id')->references('id')->on('coordonees')->onDelete('cascade')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->timestamps();
