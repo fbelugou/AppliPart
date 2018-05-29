@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/Accueil';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,8 +49,17 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
 
+
+
             // Authentication passed...
             return redirect()->intended('dashboard');
         }
     }
+
+    protected function authenticated(Request $request, $user)
+   {
+        if(!($user->objectclass[1]=="person" && (strpos($user->distinguishedname[0],'stgIUT') !== false || strpos($user->distinguishedname[0],'Formation') !== false || strpos($user->distinguishedname[0],'Administration') !== false || strpos($user->distinguishedname[0],'Exploitation') !== false) )){
+            $this->logout($request);
+        }
+   }
 }
