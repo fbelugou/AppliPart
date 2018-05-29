@@ -14,25 +14,27 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="navbar-nav ml-md-auto">
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
+						<a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
+						<a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
+						<a class="nav-link active" href="{{ route('Actions') }}">Actions</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+						<a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
 					</li>
 					<li class="nav-item">
-						 <span class="navbar-text">Utilisateur : XX</span>
+						<span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
+						<a class="nav-link" href="#" onclick="document.getElementById('formLogout').submit();">Déconnexion</a>
+						{{ Form::open(['url' => route('logout'), 'id' => 'formLogout']) }}
+						{{ Form::close() }}
 					</li>
 				</ul>
 			</div>

@@ -29,10 +29,12 @@
 						 <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
 					</li>
 					<li class="nav-item">
-						 <span class="navbar-text">Utilisateur : XX</span>
+						 <span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
+						<a class="nav-link" href="#" onclick="document.getElementById('formLogout').submit();">Déconnexion</a>
+						{{ Form::open(['url' => route('logout'), 'id' => 'formLogout']) }}
+						{{ Form::close() }}
 					</li>
 				</ul>
 			</div>

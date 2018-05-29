@@ -37,4 +37,9 @@ class Interlocuteur extends Model
   	{
   		return $this->belongsToMany('App\Entreprise','contacts')->withPivot('contactAMIO','date','objet','commentaire');
   	}
+
+    public function entreprisesDate()
+  	{
+  		return $this->belongsToMany('App\Entreprise','contacts')->orderBy('date','desc');
+  	}
 }

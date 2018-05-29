@@ -29,10 +29,12 @@
 						 <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
 					</li>
 					<li class="nav-item">
-						 <span class="navbar-text">Utilisateur : XX</span>
+						 <span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('logout') }}">Déconnexion</a>
+						<a class="nav-link" href="#" onclick="document.getElementById('formLogout').submit();">Déconnexion</a>
+						{{ Form::open(['url' => route('logout'), 'id' => 'formLogout']) }}
+						{{ Form::close() }}
 					</li>
 				</ul>
 			</div>
@@ -49,7 +51,7 @@
 				{{ Form::open(['route' => 'ContactEnregistrer']) }}
           <div id="nat" class="form-group" style="margin-top:10px;">
 						{{ Form::label('contactAMIO', 'Contact au sein d\'AMIO :') }}
-  					{{ Form::text('contactAMIO','admin', ['class' => 'form-control']) }}
+  					{{ Form::text('contactAMIO',strtoupper(auth::user()->initials[0]), ['class' => 'form-control']) }}
   					{!! $errors->first('contactAMIO', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
 					<div class="form-group" style="margin-top:10px;">
