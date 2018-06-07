@@ -59,7 +59,7 @@
 						{{ Form::label('partenaireRegulier', 'Partenaire régulier',['class' => 'form-check-label','style' => 'margin-left:30px;']) }}
 					</div>
 					<div class="form-group" style="margin-top:10px;">
-						{{ Form::select('groupe', $groupes ,null,['class' => 'form-control']) }}
+						{{ Form::select('groupe', $groupes ,$entreprise->groupe_id,['class' => 'form-control']) }}
 						{{ Form::checkbox('siegeSocial', null, false, ['class' => 'form-check-input','style' => 'margin-left:5px;']) }}
 						{{ Form::label('siegeSocial', 'Siège social',['class' => 'form-check-label','style' => 'margin-left:30px;']) }}
 					</div>
@@ -75,7 +75,7 @@
 					</div>
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('filieres', 'Filiere(s) :') }}
-						{{ Form::select('filieres', $activites ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'filieres[]']) }}
+						{{ Form::select('filieres', $filieres ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'filieres[]']) }}
 						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs filières </small>
 					</div>
 					<div class="form-group" style="margin-top:10px;">
@@ -113,12 +113,36 @@
 						{{ Form::textarea('commentaire', null, ['class' => 'form-control', 'placeholder' => 'Commentaire', 'style' => 'height:120px;']) }}
 						{!! $errors->first('commentaire', '<small class="form-text text-muted">:message</small>') !!}
 					</div>
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<th style="width:10%;">Utilisateur </th>
+							<th style="width:20%;">Date </th>
+							<th style="width:20%;">Nature </th>
+							<th style="width:50%;">Commentaire </th>
+						</thead>
+						<tbody>
+							@foreach($entreprise->evenements as $evenement)
+							<tr>
+								 <td>{{ $evenement->utilisateur }}</td>
+								 <td>{{ date_create($evenement['date'])->format('d/m/Y') }}</td>
+								 <td>{{ $evenement->nature }}</td>
+								 <td>{{ $evenement->commentaire }}...</td>
+							 </tr>
+							@endforeach
+							<tr>
+								 <td>{{ Form::text('utilisateur',mb_strtoupper(Auth::user()->initials[0],'UTF-8'), ['class' => 'form-control']) }}</td>
+								 <td>{{ Form::date('date', \Carbon\Carbon::now()) }}</td>
+								 <td>{{ Form::text('nature','Modification', ['class' => 'form-control']) }}</td>
+								 <td>{{ Form::text('commentaireEvent',null, ['class' => 'form-control', 'placeholder' => 'Commentaire']) }}</td>
+							 </tr>
+						</tbody>
+					</table>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-3">
-			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:20px;' ]) }}
-			{{ link_to_route('FicheEntreprise', 'Annuler',['id' => $entreprise->id],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
+			{{ link_to_route('FicheEntreprise', 'Annuler',['id' => $entreprise->id],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }}
 		{{ Form::close() }}
 	</div>
 </div>

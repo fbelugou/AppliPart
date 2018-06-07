@@ -28,6 +28,6 @@ $factory->define(App\Entreprise::class, function (Faker $faker) {
         'telephone' => $faker->phoneNumber,
         'commentaire' => $faker->text($maxNbChars = 200),
         'groupe_id' => null,
-        'coord_id' => null
+        'coordonnees_id' => null
     ];
 });

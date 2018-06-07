@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Entreprise;
 use App\Repositories\GroupeRepository;
 use App\Repositories\CoordonneesRepository;
+use App\Repositories\EntrepriseEventRepository;
 
 class EntrepriseRepository
 {
@@ -12,14 +13,17 @@ class EntrepriseRepository
     protected $entreprise;
     protected $groupeRepository;
     protected $coordonneesRepository;
+    protected $entrepriseEventRepository;
 
     public function __construct(Entreprise $entreprise,
                                 GroupeRepository $groupeRepository,
-                                coordonneesRepository $coordonneesRepository)
+                                coordonneesRepository $coordonneesRepository,
+                                EntrepriseEventRepository $EER)
   	{
   		  $this->entreprise = $entreprise;
         $this->groupeRepository = $groupeRepository;
         $this->coordonneesRepository = $coordonneesRepository;
+        $this->entrepriseEventRepository = $EER;
   	}
 
   	private function save(Entreprise $entreprise, Array $inputs)
@@ -34,8 +38,12 @@ class EntrepriseRepository
         $entreprise->siteWeb=$inputs['siteWeb'];
         $entreprise->telephone=$inputs['telephone'];
         $entreprise->commentaire=$inputs['commentaire'];
+
         if($inputs['groupe']!=0){
             $entreprise->groupe_id=$inputs['groupe'];
+        }
+        else{
+            $entreprise->groupe_id=null;
         }
         $adresse = $entreprise->rue.' '.$entreprise->cp.' '.$entreprise->ville;
         $resultat=$this->coordonneesRepository->store($adresse);
@@ -50,8 +58,17 @@ class EntrepriseRepository
             $entreprise->filieres()->sync($inputs['filieres']);
         }
         if(isset($inputs['interlocuteurs'])){
-            $entreprise->interlocuteurs()->sync($inputs['interlocuteurs']);
+            $interlocuteurs_id = $inputs['interlocuteurs'];
+            $pivot = array_fill(0,count($interlocuteurs_id),['date'=>date_create('01/01/1000')]);
+            $sync = array_combine($interlocuteurs_id,$pivot);
+            $entreprise->interlocuteurs()->sync($sync);
         }
+
+        $this->entrepriseEventRepository->store([$inputs['utilisateur'],
+                                                 $inputs['date'],
+                                                 $inputs['nature'],
+                                                 $inputs['commentaireEvent'],
+                                                 $entreprise->id]);
   	}
 
     public function getEntreprises()
@@ -112,8 +129,8 @@ class EntrepriseRepository
         }
         $resultat = $this->coordonneesRepository->geocode($inputs['ville']);
 
-        if($resultat[1]){
-            $longVille     = $resultat[1][1]*(M_PI/180);
+        if($resultat[0]){
+            $longVille    = $resultat[1][1]*(M_PI/180);
             $latVille     = $resultat[1][0]*(M_PI/180);
 
             foreach ($tabEntreprises as $entreprise) {
@@ -134,11 +151,48 @@ class EntrepriseRepository
                     }
                 }
             }
-            return $entreprises;
+            return ['etat'=>true,'entreprises'=>$entreprises];
         }
         elseif(isset($resultat[1])){
-            return view('Erreur',  ['message'=>$resultat[1]]);
+            return ['etat'=>false,'message'=>'Ville introuvable ou nombre maximum de requêtes dépassé'];
         }
   	}
 
+    public function checkPartenaires(){
+        $entreprises=$this->entreprise->where('partenaireRegulier','=',1)->orderBy('nom','asc')->get();
+
+        foreach($entreprises as $entreprise){
+            $dernierContact=dernierContact($entreprise);
+            //dd($entreprise->actions->first());
+            if(null !== $entreprise->actions->first()){
+                $derniereAction=date_create($entreprise->actions->first()->date);
+            }
+            else{
+                $derniereAction=null;
+            }
+            $derniereInteraction=min($dernierContact,$derniereAction);
+            if(!empty($derniereInteraction)){
+                $dateJour=\Carbon\Carbon::now();
+                if(strval($dateJour->diff($derniereInteraction)->format('%d'))>=3){
+                    $entreprise->partenaireRegulier=0;
+                    $entreprise->save();
+                }
+            }
+        }
+        echo 'Opération terminée';
+    }
+
+    public function listeMail(array $inputs)
+    {
+        $mails=array();
+        foreach(array_slice(array_keys($inputs),2) as $key=>$item){
+            $entreprise=$this->getById($item);
+            foreach($entreprise->interlocuteurs as $interlocuteur){
+                if($interlocuteur->entreprisesDate->first()->id==$entreprise->id){
+                    $mails[]=$interlocuteur->mail;
+                }
+            }
+        }
+        return $mails;
+    }
 }

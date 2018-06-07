@@ -15,7 +15,7 @@ class Interlocuteur extends Model
      * @var array
      */
     protected $fillable = [
-      'prenom','nom','fonction','telFixe','telMobile','mail','commentaire','transmission',
+      'prenom','nom','fonction','type','telFixe','telMobile','mail','commentaire','transmission',
     ];
 
     /**
@@ -29,7 +29,7 @@ class Interlocuteur extends Model
 
     public function evenements()
   	{
-  		return $this->hasMany('App\InterlocuteurEvenement');
+  		return $this->hasMany('App\InterlocuteurEvent');
   	}
 
 

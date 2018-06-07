@@ -42,6 +42,9 @@ class ContactController extends Controller
             $entreprises[$entreprise->id]=$entreprise->nom;
         }
         $tabInterlocuteurs=$this->interlocuteurRepository->getInterlocuteursByEntreprise($entreprise_id);
+        if(empty($tabInterlocuteurs->first())){
+            $interlocuteurs=$this->interlocuteurRepository->getInterlocuteurs();
+        }
         foreach ($tabInterlocuteurs as $interlocuteur) {
             $interlocuteurs[$interlocuteur->interlocuteur_id]=$interlocuteur->prenom.' '.$interlocuteur->nom;
         }

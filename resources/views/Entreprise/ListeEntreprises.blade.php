@@ -82,7 +82,7 @@
 							</td>
 							<td>
 								@if (!empty($entreprise->interlocuteurs))
-									{!! dernierContact($entreprise) !!}
+									{!! afficherDernierContact($entreprise) !!}
 									@endif
 							</td>
 				    </tr>
@@ -92,7 +92,7 @@
 			</div>
     </div>
 		<div class="col-sm-2">
-			{{ link_to_route('EntrepriseAjout', 'Ajouter une entreprise', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ link_to_route('EntrepriseAjout', 'Ajouter une entreprise', [], ['class' => 'btn btn-info pull-right', 'style' => 'white-space: normal;margin-top:10px;margin-right:10px;width:80%;margin-bottom:15px;' ]) }}
 		</div>
   </div>
 </div>

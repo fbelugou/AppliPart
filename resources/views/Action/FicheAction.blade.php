@@ -1,6 +1,5 @@
 @extends('vueMere')
 
-
 @section('contenu')
 <div class="container-fluid">
 	<div class="row">
@@ -45,7 +44,7 @@
 	</div>
   <div class="row">
 		<div class="col-md-12">
-      <h3 class="text-center" style="margin-top:1rem;">Fiche d'actions</h3>
+      <h3 class="text-center" style="margin-top:1rem;">Fiche d'action</h3>
     </div>
   </div>
   <div class="row">
@@ -74,9 +73,9 @@
 			</table>
     </div>
 		<div class="col-sm-3">
-			{{ link_to_route('ActionModifier', 'Modifier', ['id' => $action->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
+			{{ link_to_route('ActionModifier', 'Modifier', ['id' => $action->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['ActionSupprimer', $action->id]]) !!}
-					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette action ?\')']) !!}
+					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette action ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
   </div>

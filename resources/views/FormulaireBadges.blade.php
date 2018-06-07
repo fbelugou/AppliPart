@@ -55,7 +55,7 @@
   	</div>
   	<div class="col-sm-8">
   		<div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;">
-  			<h2 class="card-header">Création d'une entreprise</h2>
+  			<h2 class="card-header">Formulaire de génération de badges</h2>
   			<div class="card-body">
   				{{ Form::open(['route' => 'Badges']) }}
             <div class="form-group" style="margin-top:10px;">
@@ -78,9 +78,9 @@
 									<tr>
 										<td><div class="form-group" >{{ Form::checkbox($interlocuteur->id, null, false, ['class' => 'form-check-input','style'=>'margin-left:auto;']) }}</div></td>
 										<td>
-											@foreach($interlocuteur->entreprises->groupBy('id') as $entreprise)
-												<a class="text-dark" href="{{ route('FicheEntreprise',['id'=>$entreprise->first()->id]) }}">{{ $entreprise->first()->nom }}<br/>
-											@endforeach
+											@if(null != $interlocuteur->entreprisesDate()->first())
+												<a class="text-dark" href="{{ route('FicheEntreprise',['id'=>$interlocuteur->entreprisesDate()->first()->id]) }}">{{ $interlocuteur->entreprisesDate()->first()->nom }}<br/>
+											@endif
 										</td>
 										<td>{{ $interlocuteur->prenom }}</td>
 										<td>{{ $interlocuteur->nom }}</td>
@@ -93,7 +93,7 @@
   		</div>
   	</div>
   	<div class="col-sm-2">
-  			{{ Form::submit('Télécharger', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:20px;' ]) }}
+  			{{ Form::submit('Télécharger', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;margin-bottom:20px;' ]) }}
   		{{ Form::close() }}
   	</div>
   </div>

@@ -113,12 +113,28 @@
   					{{ Form::textarea('commentaire', null, ['class' => 'form-control', 'placeholder' => 'Commentaire', 'style' => 'height:120px;']) }}
   					{!! $errors->first('commentaire', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<th style="width:8%;">Utilisateur </th>
+							<th style="width:15%;">Date </th>
+							<th style="width:25%;">Nature </th>
+							<th style="width:52%;">Commentaire </th>
+						</thead>
+						<tbody>
+							<tr>
+								 <td>{{ Form::text('utilisateur',mb_strtoupper(Auth::user()->initials[0],'UTF-8'), ['class' => 'form-control']) }}</td>
+								 <td>{{ Form::date('date', \Carbon\Carbon::now()) }}</td>
+								 <td>{{ Form::text('nature','Création', ['class' => 'form-control']) }}</td>
+								 <td>{{ Form::text('commentaireEvent',null, ['class' => 'form-control', 'placeholder' => 'Commentaire']) }}</td>
+							 </tr>
+						</tbody>
+					</table>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-3">
-			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:20px;' ]) }}
-			{{ link_to_route('Entreprises', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
+			{{ link_to_route('Entreprises', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }}
 		{{ Form::close() }}
 	</div>
 </div>

@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function()
   Route::get( '/Entreprises',                 ['as' => 'Entreprises',               'uses' => 'EntrepriseController@listerEntreprises']);
   Route::post('/Entreprises',                 ['as' => 'EntrepriseEnregistrer',     'uses' => 'EntrepriseController@enregistrer']);
   Route::get( '/Entreprises/Ajout',           ['as' => 'EntrepriseAjout',           'uses' => 'EntrepriseController@ajouter']);
+  Route::get( '/Entreprises/Mails',           ['as' => 'EntrepriseMailsForm',       'uses' => 'EntrepriseController@formulaireMailsEntreprise']);
+  Route::post( '/Entreprises/Mails',          ['as' => 'EntrepriseMails',           'uses' => 'EntrepriseController@mailsEntreprise']);
   Route::get( '/Entreprises/{id}',            ['as' => 'FicheEntreprise',           'uses' => 'EntrepriseController@afficher']);
   Route::put( '/Entreprises/{id}',            ['as' => 'EntrepriseMAJ',             'uses' => 'EntrepriseController@mettreAJour']);
   Route::delete( '/Entreprises/{id}',         ['as' => 'EntrepriseSupprimer',       'uses' => 'EntrepriseController@supprimer']);
@@ -76,7 +78,3 @@ Route::group(['middleware' => 'auth'], function()
 
   Route::post( '/Logout',                     ['as' => 'logout',                   'uses' => 'Auth\LoginController@logout']);
 });
-
-
-
-//Auth::routes();

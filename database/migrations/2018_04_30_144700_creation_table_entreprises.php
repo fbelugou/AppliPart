@@ -18,7 +18,7 @@ class CreationTableEntreprises extends Migration
             $table->string('nom');
             $table->boolean('partenaireRegulier');
             $table->boolean('siegeSocial');
-            $table->integer('taille');
+            $table->integer('taille')->nullable();
             $table->string('rue')->nullable();
             $table->string('ville')->nullable();
             $table->string('cp')->nullable();

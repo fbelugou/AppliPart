@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InterlocuteurEvent extends Model
 {
-    public $table = "interlocuteurEvents";
+    public $table = "interlocuteurevents";
     use Notifiable;
 
     /**
@@ -27,8 +27,8 @@ class InterlocuteurEvent extends Model
         //'password', 'remember_token',
     ];
 
-    public function entreprises()
+    public function interlocuteur()
   	{
-  		return $this->belongsToMany('App\Entreprise');
+  		return $this->hasOne('App\Interlocuteur');
   	}
 }

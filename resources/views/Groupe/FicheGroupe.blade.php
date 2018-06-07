@@ -82,9 +82,9 @@
 			</table>
     </div>
 		<div class="col-sm-3">
-			{{ link_to_route('GroupeModifier', 'Modifier', ['id' => $groupe->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
+			{{ link_to_route('GroupeModifier', 'Modifier', ['id' => $groupe->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['GroupeSupprimer', $groupe->id]]) !!}
-					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer ce groupe ?\')']) !!}
+					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer ce groupe ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
   </div>

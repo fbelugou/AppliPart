@@ -57,27 +57,21 @@
         <div class="card-body">
 					<div class="row">
 						<div class="col-sm-6">
-             <a href={{ route('Partenaires') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des partenaires réguliers</button></a><br/>
-						 <a href={{ route('Groupes') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des groupes</button></a><br/>
-						 <a href={{ route('Interlocuteurs') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des interlocuteurs</button></a><br/>
-						 <a href={{ route('Actions') }}><button type="button" class="btn btn-info" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des actions</button></a><br/>
+             <a href={{ route('Partenaires') }}><button type="button" class="btn btn-info btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Partenaires réguliers</button></a><br/>
+						 <a href={{ route('Groupes') }}><button type="button" class="btn btn-info btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Groupes</button></a><br/>
+						 <a href={{ route('Interlocuteurs') }}><button type="button" class="btn btn-info btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Interlocuteurs</button></a><br/>
+						 <a href={{ route('Actions') }}><button type="button" class="btn btn-info btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Actions</button></a><br/>
 					 </div>
 					 <div class="col-sm-6">
-						 <a href={{ route('Entreprises') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Liste des entreprises</button></a><br/>
-						 <a href={{ route('Badges') }}><button type="button" class="btn btn-info pull-right" style="height:3rem;width:30rem;margin-bottom:15px;">Génerer des badges</button></a><br/>
-						 	{{ Form::open(['url' => route('rechercheActions')]) }}
-						 		<div class="form-group">
-									 {{ Form::select('action', ['Choisissez un type d\'action','Stage','Alternance','JobDating','Visite d\'entreprise','Taxe d\'apprentissage','Jury d\'examen','Parrainage','Intervention technique','Formation stagiaire','Formation formateur','Embauche','Don de matériel','Autres']
-										,null, ['class' => 'form-control pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}
-								 </div>
-						 	 	 {{ Form::submit('Liste des entreprises par action',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
-							 {{ Form::close() }}
-					 </div>
+						 <a href={{ route('Entreprises') }}><button type="button" class="btn btn-info pull-right btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Entreprises</button></a><br/>
+						 <a href={{ route('Badges') }}><button type="button" class="btn btn-info pull-right btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Génerer des badges</button></a><br/>
+						 <a href={{ route('EntrepriseMailsForm') }}><button type="button" class="btn btn-info pull-right btn-lg" style="height:3rem;width:85%;margin-bottom:15px;">Générer une liste de mails</button></a><br/>
 				 </div>
         </div>
       </div>
     </div>
   </div>
+	</div>
   <div class="row">
     <div class="col-sm-12">
       <div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;margin-top:2rem;">
@@ -92,45 +86,59 @@
 				    <div class="col-sm-6">
 							{{ Form::open(['url' => route('rechercheGroupes')]) }}
 								{{ Form::hidden('limiteGrp', 'false', array('id' => 'limiteGrp')) }}
-								{{ Form::text('grp', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Capgemini']) }}
+								{{ Form::text('grp', null, ['class' => 'form-control','style'=>'height:3rem;width:85%;margin-bottom:15px;','placeholder'=>'Capgemini']) }}
 						</div>
 						<div class="col-sm-6">
-								{{ Form::submit('Rechercher un groupe',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
+								{{ Form::submit('Trouver un groupe',['class'=>'btn btn-info pull-right btn-lg','style'=>'height:3rem;width:85%;margin-bottom:15px;']) }}<br/>
 							{{ Form::close() }}
 						</div>
 						<div class="col-sm-6">
 							{{ Form::open(['url' => route('rechercheEntreprises')]) }}
 								{{ Form::hidden('limiteEnt', 'false', array('id' => 'limiteEnt')) }}
-								{{ Form::text('ent', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Capgemini Toulouse']) }}
+								{{ Form::text('ent', null, ['class' => 'form-control','style'=>'height:3rem;width:85%;margin-bottom:15px;','placeholder'=>'Capgemini Toulouse']) }}
 						</div>
 						<div class="col-sm-6">
-								{{ Form::submit('Rechercher une entreprise',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
+								{{ Form::submit('Trouver une entreprise',['class'=>'btn btn-info pull-right btn-lg','style'=>'height:3rem;width:85%;margin-bottom:15px;']) }}<br/>
 							{{ Form::close() }}
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							{{ Form::open(['url' => route('rechercheInterlocuteurs')]) }}
 								{{ Form::hidden('limiteInt', 'false', array('id' => 'limiteInt')) }}
-								{{ Form::text('int',null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Baptiste Lagarde']) }}
+								{{ Form::text('int',null, ['class' => 'form-control','style'=>'height:3rem;width:100%;margin-bottom:15px;','placeholder'=>'Baptiste Lagarde']) }}
 						</div>
-						<div class="col-sm-6">
-								{{ Form::submit('Rechercher un interlocuteur',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
+						<div class="col-sm-4">
+								{{ Form::select('type', ['Tous types','Opérationel','Ressources Humaines','Mission Handicap'],null, ['class' => 'form-control','style'=>'height:3rem;width:70%;margin-bottom:15px;']) }}
+						</div>
+						<div class="col-sm-4">
+								{{ Form::submit('Trouver un interlocuteur',['class'=>'btn btn-info pull-right btn-lg','style'=>'height:3rem;width:131%;margin-bottom:15px;']) }}<br/>
 							{{ Form::close() }}
 						</div>
 						<div class="col-sm-5">
 							{{ Form::open(['url' => route('rechercheEntreprisesDist')],['class'=>'form-inline']) }}
 								{{ Form::hidden('limiteEntDist', 'false', array('id' => 'limiteEntDist')) }}
-								{{ Form::text('ville', null, ['class' => 'form-control','style'=>'height:3rem;width:30rem;margin-bottom:15px;','placeholder'=>'Millau']) }}
+								{{ Form::text('ville', null, ['class' => 'form-control','style'=>'height:3rem;width:103%;margin-bottom:15px;','placeholder'=>'Millau']) }}
 						</div>
 						<div class="col-sm-1">
-								{{ Form::text('dist', null, ['class' => 'form-control','style'=>'height:3rem;width:5rem;margin-bottom:15px;','placeholder'=>'25']) }}
+								{{ Form::text('dist', null, ['class' => 'form-control','style'=>'height:3rem;width:100%;margin-bottom:15px;','placeholder'=>'25']) }}
 						</div>
 						<div class="col-sm-1">
 								{{ Form::label('km', 'Km',['style'=>'font-size:20px;margin-top:9px']) }}
 						</div>
 						<div class="col-sm-5">
-								{{ Form::submit('Rechercher des entreprises par rapport à une distance',['class'=>'btn btn-info pull-right','style'=>'height:3rem;width:30rem;margin-bottom:15px;']) }}<br/>
+								{{ Form::submit('Trouver des entreprises par rapport à une distance',['class'=>'btn btn-info pull-right btn-lg','style'=>'height:3rem;width:103%;margin-bottom:15px;']) }}<br/>
 							{{ Form::close() }}
 						</div>
+						<div class="col-sm-6">
+							{{ Form::open(['url' => route('rechercheActions')]) }}
+								{{ Form::hidden('limiteEntAct', 'false', array('id' => 'limiteEntAct')) }}
+								{{ Form::select('action', ['Choisissez un type d\'action','Stage','Alternance','JobDating','Visite d\'entreprise','Taxe d\'apprentissage','Jury d\'examen','Parrainage','Intervention technique','Formation stagiaire','Formation formateur','Embauche','Don de matériel','Autres']
+								 ,null, ['class' => 'form-control','style'=>'height:3rem;width:85%;margin-bottom:15px;']) }}
+						</div>
+						<div class="col-sm-6">
+							{{ Form::submit('Trouver des entreprises par rapport à une action',['class'=>'btn btn-info pull-right btn-lg','style'=>'height:3rem;width:85%;margin-bottom:15px;']) }}<br/>
+						{{ Form::close() }}
+						</div>
+					</div>
         </div>
       </div>
     </div>
@@ -142,6 +150,7 @@
 	document.getElementById('limiteGrp').value=false;
 	document.getElementById('limiteEnt').value=false;
 	document.getElementById('limiteInt').value=false;
+	document.getElementById('limiteEntAct').value=false;
 	document.getElementById('limiteEntDist').value=false;
 
 	function changerEtat(){
@@ -149,6 +158,7 @@
 		document.getElementById('limiteGrp').value=etat;
 		document.getElementById('limiteEnt').value=etat;
 		document.getElementById('limiteInt').value=etat;
+		document.getElementById('limiteEntAct').value=etat;
 		document.getElementById('limiteEntDist').value=etat;
 	}
 

@@ -18,7 +18,7 @@ class CreationTableEntrepriseEvents extends Migration
             $table->string('utilisateur');
             $table->date('date');
             $table->string('nature');
-            $table->text('commentaire');
+            $table->text('commentaire')->nullable();
             $table->unsignedInteger('entreprise_id')->nullable();
             $table->foreign('entreprise_id')->references('id')->on('entreprises')
                 ->onDelete('restrict')

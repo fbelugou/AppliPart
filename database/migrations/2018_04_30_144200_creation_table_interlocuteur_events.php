@@ -18,7 +18,7 @@ class CreationTableInterlocuteurEvents extends Migration
             $table->string('utilisateur');
             $table->date('date');
             $table->string('nature');
-            $table->text('commentaire');
+            $table->text('commentaire')->nullable();
             $table->unsignedInteger('interlocuteur_id')->nullable();
             $table->foreign('interlocuteur_id')->references('id')->on('interlocuteurs')
                 ->onDelete('restrict')

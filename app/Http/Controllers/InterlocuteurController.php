@@ -14,6 +14,8 @@ use App\Http\Requests\InterlocuteurSearchRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
+use App\Mail\AjoutBD;
+use Illuminate\Support\Facades\Mail;
 
 class InterlocuteurController extends Controller
 {
@@ -47,6 +49,9 @@ class InterlocuteurController extends Controller
     {
         $interlocuteur = $this->interlocuteurRepository->store($request->all());
 
+        // Mail::to($interlocuteur->mail, $interlocuteur->prenom.' '.$interlocuteur->nom)
+        //       ->send(new AjoutBD($interlocuteur));
+
         return redirect()->route('FicheInterlocuteur',['id' => $interlocuteur->id]);
     }
 
@@ -66,7 +71,19 @@ class InterlocuteurController extends Controller
         }
         $interlocuteur = $this->interlocuteurRepository->getById($id);
 
-        return view('Interlocuteur\ModifierInterlocuteur',  compact('interlocuteur','entreprises'));
+        switch ($interlocuteur->type) {
+          case 'Opérationel':
+            $nbType=1;
+            break;
+          case 'Ressources Humaines':
+            $nbType=2;
+            break;
+          case 'Mission Handicap':
+            $nbType=3;
+            break;
+        }
+
+        return view('Interlocuteur\ModifierInterlocuteur',  compact('interlocuteur','entreprises','nbType'));
     }
 
     public function mettreAJour(InterlocuteurUpdateRequest $request, $id)
@@ -87,7 +104,7 @@ class InterlocuteurController extends Controller
     {
         $mails = $this->interlocuteurRepository->getInterlocuteursMail(Session::get('interlocuteurs'));
 
-        return view('Interlocuteur\ListeMail',compact('mails'));
+        return view('ListeMail',compact('mails'));
     }
 
     public function recherche(InterlocuteurSearchRequest $request)

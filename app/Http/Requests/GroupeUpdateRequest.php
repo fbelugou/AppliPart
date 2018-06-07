@@ -25,7 +25,6 @@ class GroupeUpdateRequest extends FormRequest
     {
         return [
           'nom' => 'required|max:255',
-          'taille' => 'numeric',
         ];
     }
 }

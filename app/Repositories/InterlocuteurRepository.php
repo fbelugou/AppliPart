@@ -3,15 +3,18 @@
 namespace App\Repositories;
 
 use App\Interlocuteur;
+use App\Repositories\InterlocuteurEventRepository;
+use Illuminate\Support\Facades\DB;
 
 class InterlocuteurRepository
 {
 
     protected $interlocuteur;
 
-    public function __construct(Interlocuteur $interlocuteur)
+    public function __construct(Interlocuteur $interlocuteur,InterlocuteurEventRepository $interlocuteurEventRepository)
   	{
   		  $this->interlocuteur = $interlocuteur;
+        $this->interlocuteurEventRepository = $interlocuteurEventRepository;
   	}
 
   	private function save(Interlocuteur $interlocuteur, Array $inputs)
@@ -24,6 +27,18 @@ class InterlocuteurRepository
         $interlocuteur->telMobile=$inputs['telMobile'];
         $interlocuteur->mail=$inputs['mail'];
         $interlocuteur->commentaire=$inputs['commentaire'];
+
+        switch ($inputs['type']) {
+          case 1:
+            $interlocuteur->type='Opérationel';
+            break;
+          case 2:
+            $interlocuteur->type='Ressources Humaines';
+            break;
+          case 3:
+            $interlocuteur->type='Mission Handicap';
+            break;
+        }
 
         switch ($inputs['civilite']) {
           case 0:
@@ -47,6 +62,12 @@ class InterlocuteurRepository
         if(isset($inputs['entreprises'])){
             $interlocuteur->entreprises()->sync($inputs['entreprises']);
         }
+
+        $this->interlocuteurEventRepository->store([$inputs['utilisateur'],
+                                                 $inputs['date'],
+                                                 $inputs['nature'],
+                                                 $inputs['commentaireEvent'],
+                                                 $interlocuteur->id]);
   	}
 
   	public function getInterlocuteurs()
@@ -96,9 +117,55 @@ class InterlocuteurRepository
 
     public function search(Array $inputs)
   	{
+        if($inputs['type']!=0){
+            switch($inputs['type']){
+              case 1:
+                $type='Opérationel';
+                break;
+              case 2:
+                $type='Ressources Humaines';
+                break;
+              case 3:
+                $type='Mission Handicap';
+                break;
+            }
+
+            $entree=$inputs['int'];
+            $tabInterlocuteurs= $this->interlocuteur->where('type','=',$type)
+                                                    ->where(function($q) use ($entree){
+                                                      $q->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$entree."%'")
+                                                        ->orWhere('nom','like','%'.$entree.'%')
+                                                        ->orWhere('prenom','like','%'.$entree.'%');
+                                                    })
+                                                    ->orderBy('nom','asc')
+                                                    ->get();
+                                                    
+            if($inputs['limiteInt']=='true'){
+              $interlocuteurs=array();
+                foreach($tabInterlocuteurs as $interlocuteur){
+                    foreach($interlocuteur->entreprises as $entreprise){
+                        if($entreprise->partenaireRegulier){
+                            if(!in_array($interlocuteur,$interlocuteurs)){
+                                $interlocuteurs[]=$interlocuteur;
+                            }
+                        }
+                    }
+                }
+                return $interlocuteurs;
+            }
+            else{
+                return $tabInterlocuteurs;
+            }
+        }
+
+        $tabInterlocuteurs= $this->interlocuteur->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$inputs['int']."%'")
+                                                ->orWhere('nom','like','%'.$inputs['int'].'%')
+                                                ->orWhere('prenom','like','%'.$inputs['int'].'%')
+                                                ->orderBy('nom','asc')
+                                                ->get();
+
         if($inputs['limiteInt']=='true'){
-            $tabInterlocuteurs= $this->interlocuteur->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$inputs['int']."%'")->orWhere('nom','like','%'.$inputs['int'].'%')->orWhere('prenom','like','%'.$inputs['int'].'%')->orderBy('nom','asc')->get();
-            $interlocuteurs=array();
+          $interlocuteurs=array();
             foreach($tabInterlocuteurs as $interlocuteur){
                 foreach($interlocuteur->entreprises as $entreprise){
                     if($entreprise->partenaireRegulier){
@@ -111,7 +178,7 @@ class InterlocuteurRepository
             return $interlocuteurs;
         }
         else{
-            return $this->interlocuteur->whereRaw("CONCAT( prenom ,' ', nom ) LIKE '%".$inputs['int']."%'")->orWhere('nom','like','%'.$inputs['int'].'%')->orWhere('prenom','like','%'.$inputs['int'].'%')->orderBy('nom','asc')->get();
+            return $tabInterlocuteurs;
         }
   	}
 

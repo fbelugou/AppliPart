@@ -45,7 +45,7 @@
 	</div>
   <div class="row">
 		<div class="col-md-12">
-      <h3 class="text-center" style="margin-top:1rem;">Résultats de recherche pour les actions : {{ $actions->first()->nature }}</h3>
+      <h3 class="text-center" style="margin-top:1rem;">Résultats de recherche pour les actions : {{$nature}}</h3>
     </div>
   </div>
   <div class="row">
@@ -63,18 +63,30 @@
 				  </thead>
 				  <tbody>
 						@foreach($actions as $action)
-						<tr>
-							<td> <a href="{{ route('FicheEntreprise',['id' => isset($action->entreprise) ? $action->entreprise->id : ' '] ) }}" class="text-dark"> {{ isset($action->entreprise) ? $action->entreprise->nom : ' ' }} </a> </td>
-							<td> <a href="{{ route('FicheAction',['id' => $action->id ])}}" class="text-dark">{{ $action->nature}} </a> </td>
-							<td> {{ date_create($action->date)->format('d/m/Y') }} </td>
-				    </tr>
+							@if($partReg=='true')
+								@if(!is_null($action->entreprise))
+									@if($action->entreprise->partenaireRegulier)
+									<tr>
+										<td> <a href="{{ route('FicheEntreprise',['id' => isset($action->entreprise) ? $action->entreprise->id : ' '] ) }}" class="text-dark"> {{ isset($action->entreprise) ? $action->entreprise->nom : ' ' }} </a> </td>
+										<td> <a href="{{ route('FicheAction',['id' => $action->id ])}}" class="text-dark">{{ $action->nature}} </a> </td>
+										<td> {{ date_create($action->date)->format('d/m/Y') }} </td>
+							    </tr>
+									@endif
+								@endif
+							@else
+							<tr>
+								<td> <a href="{{ route('FicheEntreprise',['id' => isset($action->entreprise) ? $action->entreprise->id : ' '] ) }}" class="text-dark"> {{ isset($action->entreprise) ? $action->entreprise->nom : ' ' }} </a> </td>
+								<td> <a href="{{ route('FicheAction',['id' => $action->id ])}}" class="text-dark">{{ $action->nature}} </a> </td>
+								<td> {{ date_create($action->date)->format('d/m/Y') }} </td>
+							</tr>
+							@endif
 						@endforeach
 				  </tbody>
 				</table>
 			</div>
     </div>
 		<div class="col-sm-2">
-			{{ link_to_route('ActionAjout', 'Ajouter une action', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ link_to_route('ActionAjout', 'Ajouter une action', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;white-space: normal;width:80%;margin-bottom:15px;' ]) }}
 		</div>
   </div>
 </div>

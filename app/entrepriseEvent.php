@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EntrepriseEvent extends Model
 {
-    public $table = "entrepriseEvents";
+    public $table = "entrepriseevents";
     use Notifiable;
 
     /**
@@ -27,9 +27,9 @@ class EntrepriseEvent extends Model
         //'password', 'remember_token',
     ];
 
-    public function entreprises()
+    public function entreprise()
   	{
-  		return $this->belongsTo('App\Entreprise');
+  		return $this->hasOne('App\Entreprise');
   	}
 
 

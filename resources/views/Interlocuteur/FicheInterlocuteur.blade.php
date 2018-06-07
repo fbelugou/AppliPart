@@ -81,8 +81,8 @@
 					<tr>
 						<td>Entreprise(s) :</td>
 						<td>
-							@foreach($interlocuteur->entreprises as $entreprise)
-								<a href="{{ route('FicheEntreprise',['id' => $entreprise->id]) }}" class="text-dark">{{ $entreprise->nom }}</a> <br>
+							@foreach($interlocuteur->entreprises->groupBy('id') as $entreprise)
+								<a href="{{ route('FicheEntreprise',['id' => $entreprise->first()->id]) }}" class="text-dark">{{ $entreprise->first()->nom }}</a> <br>
 							@endforeach
 						</td>
 					</tr>
@@ -90,12 +90,44 @@
 			</table>
     </div>
 		<div class="col-sm-3">
-			{{ link_to_route('InterlocuteurModifier', 'Modifier', ['id' => $interlocuteur->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
+			{{ link_to_route('InterlocuteurModifier', 'Modifier', ['id' => $interlocuteur->id ], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['InterlocuteurSupprimer', $interlocuteur->id]]) !!}
-					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cet interlocuteur ?\')']) !!}
+					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cet interlocuteur ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
   </div>
+	<div class="row">
+		@if(!empty($interlocuteur->evenements->first()))
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-1">
+				Suivi
+		</div>
+		<div class="col-sm-5">
+				<table class="table table-striped">
+					<thead class="thead-light">
+						<th style="width:10%;">Utilisateur </th>
+						<th style="width:20%;">Date </th>
+						<th style="width:20%;">Nature </th>
+						<th style="width:50%;">Commentaire </th>
+					</thead>
+					<tbody>
+						@foreach($interlocuteur->evenements as $evenement)
+						<tr>
+							 <td>{{ $evenement->utilisateur }}</td>
+							 <td>{{ date_create($evenement['date'])->format('d/m/Y') }}</td>
+							 <td>{{ $evenement->nature }}</td>
+							 <td>{{ $evenement->commentaire }}...</td>
+						 </tr>
+						@endforeach
+					</tbody>
+				</table>
+
+		</div>
+		<div class="col-sm-3">
+		</div>
+		@endif
+	</div>
 </div>
 
 @endsection

@@ -17,6 +17,7 @@ use App\Http\Requests\EntrepriseCreateRequest;
 use App\Http\Requests\EntrepriseUpdateRequest;
 use App\Http\Requests\EntrepriseSearchRequest;
 use App\Http\Requests\EntrepriseDistSearchRequest;
+use App\Http\Requests\MailsEntreprisesRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -168,8 +169,26 @@ class EntrepriseController extends Controller
 
     public function rechercheDist(EntrepriseDistSearchRequest $request)
     {
-        $entreprises=$this->entrepriseRepository->searchDist($request->all());
+        $resultat=$this->entrepriseRepository->searchDist($request->all());
 
+        if($resultat['etat']===false){
+            return view('Erreur',['message'=>$resultat['message']]);
+        }
+        $entreprises=$resultat['entreprises'];
         return view('Entreprise\RechercheEntreprises',  compact('entreprises'));
+    }
+
+    public function formulaireMailsEntreprise()
+    {
+        $entreprises = $this->entrepriseRepository->getEntreprises();
+
+        return view('Entreprise\FormulaireMails',compact('entreprises'));
+    }
+
+    public function mailsEntreprise(MailsEntreprisesRequest $request)
+    {
+        $mails=$this->entrepriseRepository->listeMail($request->all());
+
+        return view('ListeMail',compact('mails'));
     }
 }

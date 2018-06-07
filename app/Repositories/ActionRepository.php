@@ -94,51 +94,13 @@ class ActionRepository
   		  $this->getById($id)->delete();
   	}
 
-    public function search(Array $inputs)
+    public function search($nature)
   	{
-        if($inputs['action']!=13) {
-            switch ($inputs['action']) {
-              case 1:
-                $nature='Stage';
-                break;
-              case 2:
-                $nature='Alternance';
-                break;
-              case 3:
-                $nature='JobDating';
-                break;
-              case 4:
-                $nature='Visite d\'entreprise';
-                break;
-              case 5:
-                $nature='Taxe d\'apprentissage';
-                break;
-              case 6:
-                $nature='Jury d\'examen';
-                break;
-              case 7:
-                $nature='Parrainage';
-                break;
-              case 8:
-                $nature='Intervention technique';
-                break;
-              case 9:
-                $nature='Formation stagiaire';
-                break;
-              case 10:
-                $nature='Formation formateur';
-                break;
-              case 11:
-                $nature='Embauche';
-                break;
-              case 12:
-                $nature='Don de materiel';
-                break;
-            }
+        if($nature!='Autres%') {
             return $this->action->where('nature','=',$nature)->orderBy('date','desc')->get();
         }
         else {
-            return $this->action->where('nature','like','Autres%')->orderBy('date','desc')->get();
+            return $this->action->where('nature','like',$nature)->orderBy('date','desc')->get();
         }
 
   	}

@@ -25,7 +25,6 @@ class EntrepriseCreateRequest extends FormRequest
     {
         return [
             'nom' => 'required|max:255',
-            'taille' => 'required|numeric',
             'rue' => 'max:255',
             'ville' => 'max:255',
             'cp' => 'max:255',

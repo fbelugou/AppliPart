@@ -32,17 +32,30 @@ class GestionController extends Controller
     public function genererBadges(BadgesRequest $request)
     {
         $fichier='<style>
-          table, th, td {
-              border: 1px solid black;
-          }
           tr{
               max-height: 207px;
               height: 207px;
           }
           td{
               width: 340px;
+              border: 1px solid black;
+          }
+          .page-break {
+              page-break-after: always;
           }
           </style>';
+        $fichier.='<table>';
+        foreach(array_slice(array_keys($request->all()),2) as $key=>$item){
+            $fichier.='<tr>';
+            $fichier.='<td>';
+            $interlocuteur=$this->interlocuteurRepository->getById($item);
+            $fichier.='<p>'.mb_strtoupper($interlocuteur->nom, 'UTF-8').' '.$interlocuteur->prenom.'</p>';
+            $fichier.='</td>';
+            $fichier.='<td>  </td>';
+            $fichier.='</tr>';
+        }
+        $fichier.='</table>';
+        $fichier.='<div class="page-break"></div>';
         $fichier.='<table>';
         foreach(array_slice(array_keys($request->all()),2) as $key=>$item){
             if($key % 2 == 0){
@@ -64,7 +77,6 @@ class GestionController extends Controller
                 $fichier.='</tr>';
             }
         }
-        $fichier.='</table>';
         $pdf = PDF::loadHTML($fichier);
         return $pdf->download('Badges '.$request->intitule.'.pdf');
     }

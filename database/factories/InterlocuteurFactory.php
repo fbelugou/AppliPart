@@ -23,10 +23,23 @@ $factory->define(App\Interlocuteur::class, function (Faker $faker) {
     else{
       $genre='female';
     }
+    $type =rand(1,3);
+    switch ($type) {
+      case 1:
+        $type='Opérationel';
+        break;
+      case 2:
+        $type='Ressources Humaines';
+        break;
+      case 3:
+        $type='Mission Handicap';
+        break;
+    }
     return [
         'nom' => $faker->lastName,
         'prenom' => $faker->firstName($genre),
         'fonction' => $faker->jobTitle,
+        'type' => $type,
         'civilite' => $faker->title($genre),
         'telFixe' => $faker->phoneNumber,
         'telMobile' => $faker->phoneNumber,

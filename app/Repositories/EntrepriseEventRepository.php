@@ -16,15 +16,13 @@ class EntrepriseEventRepository
 
   	private function save(EntrepriseEvent $entrepriseEvent, Array $inputs)
   	{
-        $entrepriseEvent->nom=$inputs['nom'];
-        $entrepriseEvent->taille=$inputs['taille'];
+        $entrepriseEvent->utilisateur=$inputs[0];
+        $entrepriseEvent->date=$inputs[1];
+        $entrepriseEvent->nature=$inputs[2];
+        $entrepriseEvent->commentaire=$inputs[3];
+        $entrepriseEvent->entreprise_id=$inputs[4];
 
     		$entrepriseEvent->save();
-  	}
-
-  	public function getEntrepriseEvents()
-  	{
-  		  return $this->entrepriseEvent->orderBy('nom','asc')->get();
   	}
 
   	public function store(Array $inputs)
@@ -35,20 +33,4 @@ class EntrepriseEventRepository
 
     		return $entrepriseEvent;
   	}
-
-  	public function getById($id)
-  	{
-    		return $this->entrepriseEvent->findOrFail($id);
-  	}
-
-  	public function update($id, Array $inputs)
-  	{
-  		  $this->save($this->getById($id), $inputs);
-  	}
-
-  	public function destroy($id)
-  	{
-  		  $this->getById($id)->delete();
-  	}
-
 }

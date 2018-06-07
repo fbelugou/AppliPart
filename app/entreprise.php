@@ -34,7 +34,7 @@ class Entreprise extends Model
 
     public function evenements()
   	{
-  		return $this->hasMany('App\EntrepriseEvent','entrepriseEvents');
+  		return $this->hasMany('App\EntrepriseEvent')->orderBy('date','desc');
   	}
 
     public function activites()

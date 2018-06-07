@@ -19,10 +19,12 @@ class CreationTableInterlocuteurs extends Migration
             $table->string('nom');
             $table->string('civilite')->nullable();
             $table->string('fonction')->nullable();
+            $table->string('type')->nullable();
             $table->string('telFixe')->nullable();
             $table->string('telMobile')->nullable();
             $table->string('mail')->nullable();
             $table->text('commentaire')->nullable();
+            $table->string('type');
             $table->boolean('transmission');
             $table->timestamps();
         });

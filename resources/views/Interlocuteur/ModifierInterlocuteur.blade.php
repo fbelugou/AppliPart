@@ -20,13 +20,13 @@
 						 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+						 <a class="nav-link" href="{{ route('Entreprises') }}">Entreprises</a>
 					</li>
 					<li class="nav-item">
 						 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
 					</li>
 					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+						 <a class="nav-link active" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
 					</li>
 					<li class="nav-item">
 						 <span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
@@ -46,7 +46,7 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;">
-			<h2 class="card-header">Modification d'un groupe</h2>
+			<h2 class="card-header">Modification d'un interlocuteur</h2>
 			<div class="card-body">
 				{{ Form::model($interlocuteur,['route' => ['InterlocuteurMAJ',$interlocuteur->id],'method' => 'put']) }}
 				<div class="form-group" style="margin-top:10px;">
@@ -66,6 +66,10 @@
 				<div class="form-group" style="margin-top:10px;">
 					{{ Form::label('civilite', 'Civilité :') }}
 					{{ Form::select('civilite', ['M','Mme','Dr','Pr','Me'] ,null,['class' => 'form-control']) }}
+				</div>
+				<div class="form-group" style="margin-top:10px;">
+					{{ Form::label('type', 'Type de fonction :') }}
+					{{ Form::select('type', ['Choisissez un type de fonction','Opérationel','Ressources Humaines','Mission Handicap'] ,$nbType,['class' => 'form-control']) }}
 				</div>
 				<div class="form-group" style="margin-top:10px;">
 					{{ Form::label('fonction', 'Fonction :') }}
@@ -97,12 +101,36 @@
 					{{ Form::select('entreprises', $entreprises ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'entreprises[]']) }}
 					<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs Entreprises </small>
 				</div>
+				<table class="table table-striped">
+					<thead class="thead-light">
+						<th style="width:10%;">Utilisateur </th>
+						<th style="width:20%;">Date </th>
+						<th style="width:20%;">Nature </th>
+						<th style="width:50%;">Commentaire </th>
+					</thead>
+					<tbody>
+						@foreach($interlocuteur->evenements as $evenement)
+						<tr>
+							 <td>{{ $evenement->utilisateur }}</td>
+							 <td>{{ date_create($evenement['date'])->format('d/m/Y') }}</td>
+							 <td>{{ $evenement->nature }}</td>
+							 <td>{{ $evenement->commentaire }}...</td>
+						 </tr>
+						@endforeach
+						<tr>
+							 <td>{{ Form::text('utilisateur',mb_strtoupper(Auth::user()->initials[0],'UTF-8'), ['class' => 'form-control']) }}</td>
+							 <td>{{ Form::date('date', \Carbon\Carbon::now()) }}</td>
+							 <td>{{ Form::text('nature','Modification', ['class' => 'form-control']) }}</td>
+							 <td>{{ Form::text('commentaireEvent',null, ['class' => 'form-control', 'placeholder' => 'Commentaire']) }}</td>
+						 </tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-3">
-			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:20px;' ]) }}
-			{{ link_to_route('Interlocuteurs', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
+			{{ link_to_route('Interlocuteurs', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }}
 		{{ Form::close() }}
 	</div>
 </div>

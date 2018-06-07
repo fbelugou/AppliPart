@@ -60,7 +60,7 @@
 					</tr>
 					<tr>
 						<td>Groupe :</td>
-						<td>{{ (!is_null($entreprise->groupe)) ? $entreprise->groupe->nom : ' ' }}</td>
+						<td><a href="{{ route('FicheGroupe',['id'=>(!is_null($entreprise->groupe)) ? $entreprise->groupe->id : '#']) }}">{{ (!is_null($entreprise->groupe)) ? $entreprise->groupe->nom : ' ' }}</a></td>
 					</tr>
 					<tr>
 						<td>Taille :</td>
@@ -110,9 +110,9 @@
 			</table>
 		</div>
 		<div class="col-sm-3">
-			{{ link_to_route('EntrepriseModifier', 'Modifier', ['id' => $entreprise->id ],['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
+			{{ link_to_route('EntrepriseModifier', 'Modifier', ['id' => $entreprise->id ],['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }} <br/> <br/> <br/>
 			{!! Form::open(['method' => 'DELETE', 'route' => ['EntrepriseSupprimer', $entreprise->id]]) !!}
-					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:15rem;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette entreprise ?\')']) !!}
+					{!! Form::submit('Supprimer', ['class' => 'btn btn-danger pull-right','style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px' , 'onclick' => 'return confirm(\'Vraiment supprimer cette entreprise ?\')']) !!}
 			{!! Form::close() !!}
 		</div>
 	</div>
@@ -145,7 +145,7 @@
 				@endif
 			</div>
 			<div class="col-sm-3">
-				{{ link_to_route('ContactAjout', 'Ajouter un contact', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+				{{ link_to_route('ContactAjout', 'Ajouter un contact', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;white-space: normal;width:55%;margin-bottom:15px;' ]) }}
 			</div>
 	  </div>
 		<div class="row">
@@ -175,9 +175,41 @@
 				@endif
 			</div>
 			<div class="col-sm-3">
-				{{ link_to_route('ActionAjoutEntreprise', 'Ajouter une action', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;height:2.5rem;width:15rem;margin-bottom:15px;' ]) }}
+				{{ link_to_route('ActionAjoutEntreprise', 'Ajouter une action', ['id'=> $entreprise->id], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;margin-right:10px;white-space: normal;width:55%;margin-bottom:15px;' ]) }}
 			</div>
 	  </div>
+		<div class="row">
+			<div class="col-sm-3">
+			</div>
+			<div class="col-sm-1">
+					Suivi
+			</div>
+			<div class="col-sm-5">
+				@if(!empty($entreprise->evenements->first()))
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<th style="width:10%;">Utilisateur </th>
+							<th style="width:20%;">Date </th>
+							<th style="width:20%;">Nature </th>
+							<th style="width:50%;">Commentaire </th>
+						</thead>
+						<tbody>
+							@foreach($entreprise->evenements as $evenement)
+							<tr>
+								 <td>{{ $evenement->utilisateur }}</td>
+								 <td>{{ date_create($evenement['date'])->format('d/m/Y') }}</td>
+								 <td>{{ $evenement->nature }}</td>
+								 <td>{{ $evenement->commentaire }}</td>
+							 </tr>
+							@endforeach
+						</tbody>
+					</table>
+				@endif
+			</div>
+			<div class="col-sm-3">
+			</div>
+	  </div>
+	</div>
 </div>
 
 @endsection

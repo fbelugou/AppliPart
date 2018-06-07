@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InterlocuteurUpdateRequest extends FormRequest
 {
@@ -32,6 +33,7 @@ class InterlocuteurUpdateRequest extends FormRequest
             'telMobile' => 'max:255',
             'commentaire' => 'max:255',
             'mail' => 'nullable|email|max:255',
+            'type' => Rule::notIn([0]),
         ];
     }
 }
