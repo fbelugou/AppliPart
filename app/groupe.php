@@ -27,6 +27,7 @@ class Groupe extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne les entreprises du groupe
     public function entreprises()
   	{
   		return $this->hasMany('App\Entreprise');

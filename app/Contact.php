@@ -27,11 +27,13 @@ class Contact extends Model
         'interlocuteur_id', 'entreprise_id',
     ];
 
+    //Retourne l'entreprise en lien avec le contact
     public function entreprise()
   	{
   		return $this->hasOne('App\Entreprise');
   	}
 
+    //Retourne l'interlocuteur en lien avec le contact
     public function interlocuteur()
   	{
   		return $this->hasOne('App\Interlocuteur');

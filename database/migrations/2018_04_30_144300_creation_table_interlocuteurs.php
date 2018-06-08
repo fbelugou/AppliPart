@@ -24,7 +24,6 @@ class CreationTableInterlocuteurs extends Migration
             $table->string('telMobile')->nullable();
             $table->string('mail')->nullable();
             $table->text('commentaire')->nullable();
-            $table->string('type');
             $table->boolean('transmission');
             $table->timestamps();
         });

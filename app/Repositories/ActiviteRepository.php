@@ -14,6 +14,7 @@ class ActiviteRepository
   		  $this->activite = $activite;
   	}
 
+    //Récupère les activités
   	public function getActivites()
   	{
   		  return $this->activite->orderBy('libelle','asc')->get();

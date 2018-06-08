@@ -27,6 +27,7 @@ class InterlocuteurEvent extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne l'interlocuteur en lien avec l'évenement
     public function interlocuteur()
   	{
   		return $this->hasOne('App\Interlocuteur');

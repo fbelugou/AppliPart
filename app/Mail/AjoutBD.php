@@ -30,8 +30,12 @@ class AjoutBD extends Mailable
      */
     public function build()
     {
+                    //objet du mail
         return $this->subject('Ajout de vos données à AMIO')
+                    //envoyeur du mail (doit correspondre aux informations dans le fichier .env)
+                    //from(<adresse>,<nom(facultatif)>)
                     ->from('appligestionpartenariats@gmail.com','Application de gestion de partenariats AMIO')
+                    //vue à utiliser et données transférées
                     ->view('mail',['interlocuteur'=>$this->interlocuteur]);
     }
 }

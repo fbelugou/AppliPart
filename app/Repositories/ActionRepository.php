@@ -14,12 +14,14 @@ class ActionRepository
   		  $this->action = $action;
   	}
 
+    //Fonction d'enregistrement en base de données d'une action
   	private function save(Action $action, Array $inputs)
   	{
+        //Récupération de la date du commentaire et de l'id de l'entreprise
         $action->date=date_create($inputs['date']);
         $action->commentaire=$inputs['commentaire'];
         $action->entreprise_id=$inputs['entreprise'];
-
+        //Récupération et mise en chaine de caractères de la nature
         switch ($inputs['nature']) {
           case 1:
             $action->nature='Stage';
@@ -61,41 +63,51 @@ class ActionRepository
             $action->nature='Autres('.$inputs['autres'].')';
             break;
         }
-
+        //Enregistrement des modifications apportés à l'objet
     		$action->save();
   	}
 
+    //Fonction de récupération des actions
   	public function getActions()
   	{
+        //Retroune les actions triés par date du plus récent au plus ancien
   		  return $this->action->orderBy('date','desc')->get();
   	}
 
+    //Fonction d'enregistrement d'une action
   	public function store(Array $inputs)
   	{
+        //Création d'une action
     		$action = new $this->action;
-
+        //Appel à la méthode de sauvegarde en base de données du repository
     		$this->save($action, $inputs);
-
+        //retourne l'action
     		return $action;
   	}
 
+    //Récupère une action selon son id
   	public function getById($id)
   	{
     		return $this->action->findOrFail($id);
   	}
 
+    //Fonction de mise à jour d'une action
   	public function update($id, Array $inputs)
   	{
+        //Récupère une action et appelle la méthode de sauvegarde en base de données du controlleur
   		  $this->save($this->getById($id), $inputs);
   	}
 
+    //Fonction de suppression d'une action en base de données
   	public function destroy($id)
   	{
   		  $this->getById($id)->delete();
   	}
 
+    //Fonction de recherche d'une action par rapport à la nature
     public function search($nature)
   	{
+        //Récupère les actions par ordre de date du plus récent au plus ancien
         if($nature!='Autres%') {
             return $this->action->where('nature','=',$nature)->orderBy('date','desc')->get();
         }

@@ -14,6 +14,7 @@
 Route::get( '/Login',                       ['as' => 'login',                    'uses' => 'Auth\LoginController@showLoginForm']);
 Route::post( '/Login',                      [                                    'uses' => 'Auth\LoginController@login']);
 
+//Routes nécéssitant d'être connecté
 Route::group(['middleware' => 'auth'], function()
 {
   Route::get( '/',                            ['as' => 'Accueil',                   'uses' => 'GestionController@index']);

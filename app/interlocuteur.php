@@ -27,17 +27,19 @@ class Interlocuteur extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne les évenements sur la fiche interlocuteur (Création, modification ...)
     public function evenements()
   	{
   		return $this->hasMany('App\InterlocuteurEvent');
   	}
 
-
+    //Retourne la liste des entreprises avec les données de la table associative
     public function entreprises()
   	{
   		return $this->belongsToMany('App\Entreprise','contacts')->withPivot('contactAMIO','date','objet','commentaire');
   	}
 
+    //Retourne les entreprises de la plus récente à la plus ancienne (par rapport au contact)
     public function entreprisesDate()
   	{
   		return $this->belongsToMany('App\Entreprise','contacts')->orderBy('date','desc');

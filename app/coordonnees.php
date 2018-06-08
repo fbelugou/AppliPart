@@ -27,6 +27,7 @@ class Coordonnees extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne l'entreprise en lien avec les coordonnées
     public function entreprise()
   	{
   		return $this->belongsTo('App\Entreprise');

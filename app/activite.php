@@ -27,6 +27,7 @@ class Activite extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne les entreprises de cette activité
     public function entreprises()
   	{
   		return $this->belongsToMany('App\Entreprise');

@@ -27,6 +27,7 @@ class EntrepriseEvent extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne l'entreprise en lien avec l'évenement
     public function entreprise()
   	{
   		return $this->hasOne('App\Entreprise');

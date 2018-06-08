@@ -14,23 +14,30 @@ class GestionController extends Controller
 
     public function __construct(InterlocuteurRepository $IR)
     {
-      $this->interlocuteurRepository = $IR;
+        //Récupération du repository nécéssaire
+        $this->interlocuteurRepository = $IR;
     }
 
+    //Fonction de redirection à la page d'accueil
     public function index()
     {
+        //Affichage de la vue d'accueil
         return view('Accueil');
     }
 
+    //Fonction d'affichage d'un formulaire de génération de badges
     public function formulaireBadges()
     {
+        //Récupération des interlocuteurs
         $interlocuteurs= $this->interlocuteurRepository->getInterlocuteurs();
-
+        //Envoi des interlocuteurs à la vue FormulaireBadges et affichage de la vue
         return view('FormulaireBadges',compact('interlocuteurs'));
     }
 
+    //Fonction de génération d'un pdf de badges avec le résultats du formulaire
     public function genererBadges(BadgesRequest $request)
     {
+        //CSS pour la taille des badges et les bordures
         $fichier='<style>
           tr{
               max-height: 207px;
@@ -45,6 +52,8 @@ class GestionController extends Controller
           }
           </style>';
         $fichier.='<table>';
+        //Récupération des clés du tableau(array_keys) qui sont des id des interlocuteurs
+        //en ignorant les 2 premieres entrées(array_slice) qui sont le libellé de l'évenement et le token de sécurité
         foreach(array_slice(array_keys($request->all()),2) as $key=>$item){
             $fichier.='<tr>';
             $fichier.='<td>';
@@ -78,10 +87,7 @@ class GestionController extends Controller
             }
         }
         $pdf = PDF::loadHTML($fichier);
+        //Téléchargement du fichier
         return $pdf->download('Badges '.$request->intitule.'.pdf');
-    }
-
-    public function genererPDF($request){
-
     }
 }

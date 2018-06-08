@@ -38,27 +38,31 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    //Fonction de récupération du champ d'identification sur l'active directory
     public function username()
     {
+        //Nom du champ d'identification sur l'active directory
         return 'sAMAccountName';
     }
 
+    //Fonction d'identification
     public function authenticate(Request $request)
     {
+        //Récupération de l'identifiant et du mot de passe
         $credentials = $request->only('sAMAccountName', 'password');
-
+        //Tentative de connection
         if (Auth::attempt($credentials)) {
-
-
-
-            // Authentication passed...
+            // Redirection vers l'url demandée si l'utilisateur à réussi à se connecter
             return redirect()->intended('dashboard');
         }
     }
 
+    //Fonction de vérification de l'utilisation après authentification
     protected function authenticated(Request $request, $user)
    {
+        //Tri des utilisateurs selon leurs groupe sur l'active directory
         if(!($user->objectclass[1]=="person" && (strpos($user->distinguishedname[0],'stgIUT') !== false || strpos($user->distinguishedname[0],'Formation') !== false || strpos($user->distinguishedname[0],'Administration') !== false || strpos($user->distinguishedname[0],'Exploitation') !== false) )){
+            //Déconnecte l'utilisateur si il n'est pas autoriser à utiliser l'application
             $this->logout($request);
         }
    }

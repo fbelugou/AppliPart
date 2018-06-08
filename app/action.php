@@ -27,6 +27,7 @@ class Action extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne l'entreprise en lien avec l'action
     public function entreprise()
   	{
   		return $this->belongsTo('App\Entreprise');

@@ -27,6 +27,7 @@ class Filiere extends Model
         //'password', 'remember_token',
     ];
 
+    //Retourne les entreprises en lien avec la filière
     public function entreprises()
   	{
   		return $this->belongsToMany('App\Entreprise');
