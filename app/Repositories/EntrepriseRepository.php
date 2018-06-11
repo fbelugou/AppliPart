@@ -154,6 +154,7 @@ class EntrepriseRepository
         else{
             $tabEntreprises = $this->entreprise->get();
         }
+        $entreprises=array();
         //Encodage GPS des coordonées de la ville ou adresse fournie
         $resultat = $this->coordonneesRepository->geocode($inputs['ville']);
         if($resultat[0]){
