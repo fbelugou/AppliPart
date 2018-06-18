@@ -34,7 +34,8 @@ class EntrepriseRepository
         $entreprise->partenaireRegulier=isset($inputs['partenaireRegulier']);
         $entreprise->siegeSocial=isset($inputs['siegeSocial']);
         $entreprise->taille=$inputs['taille'];
-        $entreprise->rue=$inputs['rue'];
+        $entreprise->adresse1=$inputs['adresse1'];
+        $entreprise->adresse2=$inputs['adresse2'];
         $entreprise->ville=$inputs['ville'];
         $entreprise->cp=$inputs['cp'];
         $entreprise->siteWeb=$inputs['siteWeb'];
@@ -48,7 +49,7 @@ class EntrepriseRepository
             $entreprise->groupe_id=null;
         }
         //Mise en forme de l'adresse pour encodage GPS
-        $adresse = $entreprise->rue.' '.$entreprise->cp.' '.$entreprise->ville;
+        $adresse = $entreprise->adresse1.' '.$entreprise->cp.' '.$entreprise->ville;
         //Appel à la fonction d'enregistrement de coordonnées GPS
         $resultat=$this->coordonneesRepository->store($adresse);
         //Si la fonction à marcher mise en place du lien avec l'objet coordonnées

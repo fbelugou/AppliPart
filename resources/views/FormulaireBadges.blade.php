@@ -55,7 +55,7 @@
   	</div>
   	<div class="col-sm-8">
   		<div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;">
-  			<h2 class="card-header">Formulaire de génération de badges</h2>
+  			<h2 class="card-header">Génération de badges</h2>
   			<div class="card-body">
   				{{ Form::open(['route' => 'Badges']) }}
             <div class="form-group" style="margin-top:10px;">

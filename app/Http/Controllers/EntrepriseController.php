@@ -131,6 +131,8 @@ class EntrepriseController extends Controller
     //Fonction d'affichage de formulaire de modification d'une entreprise
     public function modifier($id)
     {
+        //Récupération de l'entreprise
+        $entreprise=$this->entrepriseRepository->getById($id);
         //Création de la liste des groupes
         $groupes[0]='Choisissez un groupe';
         //Récupération des groupes
@@ -175,7 +177,7 @@ class EntrepriseController extends Controller
         //redirection à l'action FicheEntreprise du controlleur avec l'id de l'entreprise
         return redirect()->route('FicheEntreprise',['id' => $id]);
     }
-    
+
     //Fonction de suppression d'une entreprise
     public function supprimer($id)
     {

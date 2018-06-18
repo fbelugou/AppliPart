@@ -84,7 +84,7 @@
 					</tr>
 					<tr>
 					  <td>Adresse :</td>
-						<td> {{ $entreprise->rue }} {{ $entreprise->cp }} {{ $entreprise->ville }}</td>
+						<td> {{ $entreprise->adresse1 }} {{ $entreprise->adresse2 }} {{ $entreprise->cp }} {{ $entreprise->ville }}</td>
 					</tr>
 					<tr>
 						<td>Site Web :</td>

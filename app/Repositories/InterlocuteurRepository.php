@@ -98,6 +98,7 @@ class InterlocuteurRepository
     //Fonction de récupération des adresses mail d'une collection d'unterlocuteurs
     public function getInterlocuteursMail($interlocuteurs)
   	{
+        $mails=array();
         //Parcours les objets interlocuteurs
         foreach ($interlocuteurs as $interlocuteur) {
           //Récupère les mails

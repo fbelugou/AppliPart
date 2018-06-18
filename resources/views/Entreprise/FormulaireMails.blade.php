@@ -55,7 +55,7 @@
   	</div>
   	<div class="col-sm-8">
   		<div class="card" style="max-width:75rem;margin-left:auto;margin-right:auto;">
-  			<h2 class="card-header">Formulaire de génération d'une liste de mails</h2>
+  			<h2 class="card-header">Génération d'une liste de mails</h2>
   			<div class="card-body">
   				{{ Form::open(['route' => 'EntrepriseMails']) }}
             <table class="table table-sm table-bordered table-hover">

@@ -69,19 +69,24 @@
   					{!! $errors->first('taille', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
 					<div class="form-group" style="margin-top:10px;">
-						{{ Form::label('activites', 'Activite(s) :') }}
+						{{ Form::label('activites', 'Activité(s) :') }}
             {{ Form::select('activites', $activites ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'activites[]']) }}
-						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs activités </small>
+						<small class="form-text text-muted">Maintenez la touche Ctrl pour sélectionner plusieurs activités </small>
   				</div>
 					<div class="form-group" style="margin-top:10px;">
-						{{ Form::label('filieres', 'Filiere(s) :') }}
+						{{ Form::label('filieres', 'Filière(s) :') }}
             {{ Form::select('filieres', $filieres ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'filieres[]']) }}
-						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs filières </small>
+						<small class="form-text text-muted">Maintenez la touche Ctrl pour sélectionner plusieurs filières </small>
   				</div>
           <div class="form-group" style="margin-top:10px;">
-						{{ Form::label('rue', 'Rue :') }}
-  					{{ Form::text('rue', null, ['class' => 'form-control', 'placeholder' => 'Rue']) }}
-  					{!! $errors->first('rue', '<small class="form-text text-muted">:message</small>') !!}
+						{{ Form::label('adresse1', 'Adresse :') }}
+  					{{ Form::text('adresse1', null, ['class' => 'form-control', 'placeholder' => 'Adresse']) }}
+  					{!! $errors->first('adresse1', '<small class="form-text text-muted">:message</small>') !!}
+  				</div>
+					<div class="form-group" style="margin-top:10px;">
+						{{ Form::label('adresse2', 'Complément d\'adresse :') }}
+  					{{ Form::text('adresse2', null, ['class' => 'form-control', 'placeholder' => 'Complément d\'adresse']) }}
+  					{!! $errors->first('adresse2', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
           <div class="form-group" style="margin-top:10px;">
 						{{ Form::label('cp', 'Code postal :') }}
@@ -99,20 +104,21 @@
 						{!! $errors->first('siteWeb', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
   				<div class="form-group" style="margin-top:10px;">
-						{{ Form::label('telephone', 'Telephone :') }}
-  					{{ Form::text('telephone',null, ['class' => 'form-control', 'placeholder' => 'Telephone']) }}
+						{{ Form::label('telephone', 'Téléphone :') }}
+  					{{ Form::text('telephone',null, ['class' => 'form-control', 'placeholder' => 'Téléphone']) }}
 						{!! $errors->first('telephone', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('interlocuteurs', 'Interlocuteurs :') }}
             {{ Form::select('interlocuteurs', $interlocuteurs ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'interlocuteurs[]']) }}
-						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs Interlocuteurs </small>
+						<small class="form-text text-muted">Maintenez la touche Ctrl pour sélectionner plusieurs interlocuteurs </small>
   				</div>
           <div class="form-group" style="margin-top:10px;">
 						{{ Form::label('commentaire', 'Commentaire :') }}
   					{{ Form::textarea('commentaire', null, ['class' => 'form-control', 'placeholder' => 'Commentaire', 'style' => 'height:120px;']) }}
   					{!! $errors->first('commentaire', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
+					Fiche de suivi
 					<table class="table table-striped">
 						<thead class="thead-light">
 							<th style="width:8%;">Utilisateur </th>
@@ -133,7 +139,7 @@
 		</div>
 	</div>
 	<div class="col-sm-3">
-			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
+			{{ Form::submit('Valider', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
 			{{ link_to_route('Entreprises', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }}
 		{{ Form::close() }}
 	</div>

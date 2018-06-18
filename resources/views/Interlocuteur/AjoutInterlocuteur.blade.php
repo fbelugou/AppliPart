@@ -100,8 +100,9 @@
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::label('entreprises', 'Entreprise(s) :') }}
             {{ Form::select('entreprises', $entreprises ,null,[ 'class'=>'form-control', 'multiple'=>'' ,'name'=>'entreprises[]']) }}
-						<small class="form-text text-muted">Maintenez la touche Ctrl pour selectionner plusieurs Entreprises </small>
+						<small class="form-text text-muted">Maintenez la touche Ctrl pour sélectionner plusieurs entreprises </small>
   				</div>
+					Fiche de suivi
 					<table class="table table-striped">
 						<thead class="thead-light">
 							<th style="width:8%;">Utilisateur </th>
@@ -122,7 +123,7 @@
 		</div>
 	</div>
 	<div class="col-sm-3">
-			{{ Form::submit('Envoyer', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
+			{{ Form::submit('Valider', ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:68px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:20px;' ]) }}
 			{{ link_to_route('Interlocuteurs', 'Annuler',[],['class' => 'btn btn-danger pull-right', 'style' => 'margin-top:10px;margin-right:25px;height:2.5rem;width:55%;margin-bottom:15px;' ]) }}
 		{{ Form::close() }}
 	</div>
