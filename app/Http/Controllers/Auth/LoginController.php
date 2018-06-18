@@ -61,8 +61,10 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
    {
         //Tri des utilisateurs selon leurs groupe sur l'active directory
+        //On vérifie si l'utilisateur est une personne puis
+        //On vérifie si dans la liste des groupes de l'utilisateur on trouve un des groupes autorisés à se connecter
         if(!($user->objectclass[1]=="person" && (strpos($user->distinguishedname[0],'stgIUT') !== false || strpos($user->distinguishedname[0],'Formation') !== false || strpos($user->distinguishedname[0],'Administration') !== false || strpos($user->distinguishedname[0],'Exploitation') !== false) )){
-            //Déconnecte l'utilisateur si il n'est pas autoriser à utiliser l'application
+            //Déconnecte l'utilisateur si il n'est pas autorisé à utiliser l'application
             $this->logout($request);
         }
    }
