@@ -58,11 +58,13 @@ class InterlocuteurController extends Controller
     {
         //Enregistrement en base de l'interlocuteur
         $interlocuteur = $this->interlocuteurRepository->store($request->all());
-        //Envoi d'un mail pour prévenir l'utilisateur de son ajour à la base
+        //Envoi d'un mail pour prévenir l'utilisateur de son ajour à la base (si l'adresse n'est pas nulle)
         //Mail modifiable : ressources/views/mail.blade.php
         //Sujet et envoyeur du mail modifiable : app/mail/ajoutBD.php
-        Mail::to($interlocuteur->mail, $interlocuteur->prenom.' '.$interlocuteur->nom)
-              ->send(new AjoutBD($interlocuteur));
+        if(!is_null($interlocuteur->mail)){
+            Mail::to($interlocuteur->mail, $interlocuteur->prenom.' '.$interlocuteur->nom)
+                  ->send(new AjoutBD($interlocuteur));
+        }
         //Redirection à l'action FicheInterlocuteur du controller avec l'id de l'interlocuteur
         return redirect()->route('FicheInterlocuteur',['id' => $interlocuteur->id]);
     }
