@@ -75,7 +75,7 @@
 							</td>
 							<td>
 								@if (!is_null($entreprise->interlocuteurs))
-									@foreach($entreprise->Interlocuteurs->GroupBy('id') as $interlocuteur)
+									@foreach($entreprise->Interlocuteurs->GroupBy('interlocuteur_id') as $interlocuteur)
 										 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->first()->id ]) }}">{{  $interlocuteur->first()->prenom  }}  {{ $interlocuteur->first()->nom }}</a><br>
 									@endforeach
 								@endif

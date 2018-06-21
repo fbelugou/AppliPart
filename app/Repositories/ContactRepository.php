@@ -21,7 +21,7 @@ class ContactRepository
         $contact->contactAMIO=$inputs['contactAMIO'];
         $contact->date=date_create($inputs['date']);
         $contact->entreprise_id=$inputs['entreprise'];
-        $contact->objet=$inputs['objet'];
+        $contact->nature=$inputs['nature'];
         $contact->interlocuteur_id=$inputs['interlocuteur'];
         $contact->commentaire=$inputs['commentaire'];
         //Enregistrement de l'objet en base de données

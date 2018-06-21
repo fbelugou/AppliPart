@@ -55,8 +55,8 @@
   					{!! $errors->first('contactAMIO', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
 					<div class="form-group" style="margin-top:10px;">
-						{{ Form::label('objet', 'Objet de l\'échange :') }}
-						{{ Form::text('objet' ,null,['class' => 'form-control', 'placeholder' => 'Mail, Téléphone, Salon, ...']) }}
+						{{ Form::label('nature', 'Nature de l\'échange :') }}
+						{{ Form::text('nature' ,null,['class' => 'form-control', 'placeholder' => 'Mail, Téléphone, Salon, ...']) }}
 					</div>
           <div class="form-group" style="margin-top:10px;">
 						{{ Form::label('date', 'Date :') }}

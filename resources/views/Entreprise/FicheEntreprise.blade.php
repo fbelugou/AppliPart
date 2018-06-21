@@ -97,7 +97,7 @@
 					<tr>
 						<td>Interlocuteur(s) :</td>
 						<td>
-							@foreach($entreprise->Interlocuteurs->GroupBy('id') as $interlocuteur)
+							@foreach($entreprise->Interlocuteurs->GroupBy('interlocuteur_id') as $interlocuteur)
 								 <a class="text-dark" href="{{ route('FicheInterlocuteur',[ 'id' => $interlocuteur->first()->id ]) }}">{{  $interlocuteur->first()->prenom  }}  {{ $interlocuteur->first()->nom }}</a><br>
 							@endforeach
 						</td>
@@ -128,7 +128,7 @@
 						<thead class="thead-light">
 							<th style="width:10%;">Contact </th>
 							<th style="width:20%;">Date </th>
-							<th style="width:15%;">Objet </th>
+							<th style="width:15%;">Nature </th>
 							<th style="width:55%;">Commentaire </th>
 						</thead>
 						<tbody>
@@ -136,8 +136,8 @@
 							<tr>
 								 <td>{{ $contact['contactAMIO'] }}</td>
 								 <td><a class="text-dark" href="{{ route('FicheContact',[ 'id' => $contact['id'] ]) }}">{{ date_create($contact['date'])->format('d/m/Y') }}</a></td>
-								 <td><a class="text-dark" href="{{ route('FicheContact',[ 'id' => $contact['id'] ]) }}">{{ $contact['objet'] }}</a></td>
-								 <td>{{ substr($contact['commentaire'],1,50) }}...</td>
+								 <td><a class="text-dark" href="{{ route('FicheContact',[ 'id' => $contact['id'] ]) }}">{{ $contact['nature'] }}</a></td>
+								 <td>{{ substr($contact['commentaire'],0,50) }}...</td>
 							 </tr>
 							@endforeach
 						</tbody>
@@ -167,7 +167,7 @@
 							<tr>
 								 <td><a class="text-dark" href="{{ route('FicheAction',[ 'id' => $action->id ]) }}">{{ $action->nature }}</a></td>
 								 <td>{{ date_create($action['date'])->format('d/m/Y') }}</td>
-								 <td>{{ substr($action->commentaire,1,50) }}...</td>
+								 <td>{{ substr($action->commentaire,0,50) }}...</td>
 							 </tr>
 							@endforeach
 						</tbody>

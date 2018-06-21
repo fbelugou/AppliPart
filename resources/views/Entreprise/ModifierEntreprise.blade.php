@@ -60,7 +60,7 @@
 					</div>
 					<div class="form-group" style="margin-top:10px;">
 						{{ Form::select('groupe', $groupes ,$entreprise->groupe_id,['class' => 'form-control']) }}
-						{{ Form::checkbox('siegeSocial', null, false, ['class' => 'form-check-input','style' => 'margin-left:5px;']) }}
+						{{ Form::checkbox('siegeSocial', 1, $entreprise->siegeSocial, ['class' => 'form-check-input','style' => 'margin-left:5px;']) }}
 						{{ Form::label('siegeSocial', 'Siège social',['class' => 'form-check-label','style' => 'margin-left:30px;']) }}
 					</div>
 					<div class="form-group" style="margin-top:10px;">

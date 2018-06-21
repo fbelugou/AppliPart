@@ -15,9 +15,9 @@ class Contact extends Model
      * @var array
      */
     protected $fillable = [
-      'contactAMIO','date','objet','commentaire',
+      'contactAMIO','date','nature','commentaire',
     ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *

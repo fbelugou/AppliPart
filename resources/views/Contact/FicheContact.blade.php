@@ -63,8 +63,8 @@
 						<td> {{ date_create($contact->date)->format('d/m/Y') }} </td>
 					</tr>
 					<tr>
-						<td>Objet :</td>
-						<td> {{ $contact->objet }} </td>
+						<td>Nature :</td>
+						<td> {{ $contact->nature }} </td>
 					</tr>
 					<tr>
 						<td>Entreprise :</td>

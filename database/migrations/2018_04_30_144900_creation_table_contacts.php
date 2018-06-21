@@ -17,7 +17,7 @@ class CreationTableContacts extends Migration
             $table->increments('id');
             $table->string('contactAMIO')->nullable();
             $table->date('date')->nullable();
-            $table->string('objet')->nullable();
+            $table->string('nature')->nullable();
             $table->text('commentaire')->nullable();
             $table->unsignedInteger('entreprise_id')->nullable();
             $table->foreign('entreprise_id')->references('id')->on('entreprises')

@@ -103,15 +103,15 @@ function contacts($entreprise)
     $i=0;
     //Parcours les contacts et récupère les contacts si le champ objet est défini
     foreach($entreprise->interlocuteurs as $in){
-        if(isset($in->pivot->objet)){
+        if(isset($in->pivot->nature)){
             $contacts[$i]['contactAMIO']=$in->pivot->contactAMIO;
             $contacts[$i]['date']=$in->pivot->date;
-            $contacts[$i]['objet']=$in->pivot->objet;
+            $contacts[$i]['nature']=$in->pivot->nature;
             $contacts[$i]['commentaire']=$in->pivot->commentaire;
             $contacts[$i]['id']=$in->pivot->id;
             $i++;
         }
     }
-    //Retourne les contacts 
+    //Retourne les contacts
     return $contacts;
 }

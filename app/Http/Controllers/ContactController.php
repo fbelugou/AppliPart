@@ -39,6 +39,8 @@ class ContactController extends Controller
         foreach ($tabEntreprises as $entreprise) {
             $entreprises[$entreprise->id]=$entreprise->nom;
         }
+        //Création de la liste des interlocuteurs à afficher
+        $interlocuteurs=array();
         //Récupération des interlocuteurs de l'entreprise
         $tabInterlocuteurs=$this->interlocuteurRepository->getInterlocuteursByEntreprise($entreprise_id);
         //Si la liste est vide récupération de la liste complète des interlocuteurs
@@ -47,7 +49,9 @@ class ContactController extends Controller
         }
         //Mise en forme des objets interlocuteurs pour la liste déroulante
         foreach ($tabInterlocuteurs as $interlocuteur) {
-            $interlocuteurs[$interlocuteur->interlocuteur_id]=$interlocuteur->prenom.' '.$interlocuteur->nom;
+            if(!array_key_exists($interlocuteur->interlocuteur_id,$interlocuteurs)){
+                $interlocuteurs[$interlocuteur->interlocuteur_id]=$interlocuteur->prenom.' '.$interlocuteur->nom;
+            }
         }
         //Envoi des tableau pour les listes déroulantes à la vue AjoutContact et affichage de la vue
         return view('Contact\AjoutContact',compact('entreprise_id','entreprises','interlocuteurs'));

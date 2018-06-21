@@ -54,7 +54,7 @@ class Entreprise extends Model
     //Retourne les interlocuteurs qui ont travaillé ou qui travaillent encore pour l'entrepriseavec les données de la table associative
     public function interlocuteurs()
   	{
-  		return $this->belongsToMany('App\Interlocuteur','contacts')->withPivot('id','contactAMIO','date','objet','commentaire');
+  		return $this->belongsToMany('App\Interlocuteur','contacts')->withPivot('id','contactAMIO','date','nature','commentaire');
   	}
 
     //Retourne les coordonnées GPS de l'entreprise
