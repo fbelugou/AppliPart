@@ -1,7 +1,7 @@
 
 # Application de gestion de partenariats
 
-**[Application de gestion de partenariats](https://github.com/Alfezior/AppliPart/#manuel-de-maintenance)**
+**[Application de gestion de partenariats](https://github.com/Alfezior/AppliPart/#manuel-de-maintenance)**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Introduction](https://github.com/Alfezior/AppliPart/#introduction)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Présentation](https://github.com/Alfezior/AppliPart/#pr%C3%A9sentation)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Organisation](https://github.com/Alfezior/AppliPart/#organisation)  
