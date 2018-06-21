@@ -201,7 +201,7 @@ Pour chaque **méthode** du **contrôleur** on peux trouver une **méthode** éq
 
 - **getObjets** : Cette méthode récupère **tout les objets** du modèle concerné et **rentourne** ces objets.
 
-   **store** : Cette méthode à comme paramètre un **tableau** contenant les données d'un **formulaire de création** d'objet. Elle créée un objet et fait appel à la méthode **save** avec comme paramètre l'objet et le **tableau**. puis retourne l'objet créé.
+- **store** : Cette méthode à comme paramètre un **tableau** contenant les données d'un **formulaire de création** d'objet. Elle créée un objet et fait appel à la méthode **save** avec comme paramètre l'objet et le **tableau**. puis retourne l'objet créé.
 
 - **getById** : Cette méthode à comme paramètre **l'identifiant** d'un objet. Elle récupère l'objet concerné en base et retourne cet objet.
 
