@@ -1,7 +1,16 @@
 
-# Manuel de maintenance
+# Application de gestion de partenariats
 
-[TOC]
+**[Application de gestion de partenariats](https://github.com/Alfezior/AppliPart/#manuel-de-maintenance)**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Introduction](https://github.com/Alfezior/AppliPart/#introduction)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Présentation](https://github.com/Alfezior/AppliPart/#pr%C3%A9sentation)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Organisation](https://github.com/Alfezior/AppliPart/#organisation)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Les contrôleurs](https://github.com/Alfezior/AppliPart/#les-contr%C3%B4leurs)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[La sécuritée](https://github.com/Alfezior/AppliPart/#la-s%C3%A9curit%C3%A9e)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Les routes](https://github.com/Alfezior/AppliPart/#les-routes)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Les repositories](https://github.com/Alfezior/AppliPart/#les-repositories)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Les vues](https://github.com/Alfezior/AppliPart/#les-vues)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Les données](https://github.com/Alfezior/AppliPart/#les-donn%C3%A9es)  
 
 ## Introduction
 
@@ -31,17 +40,17 @@ Pour chaque transmission d'informations de l'utilisateur au serveur on peux trou
 
 On peut trouver ces fichiers dans les répertoires : 
 
-**app\Http\Controllers** pour les **[contrôleurs](#Les contrôleurs)**.
+**app\Http\Controllers** pour les **[contrôleurs](https://github.com/Alfezior/AppliPart/#les-contr%C3%B4leurs)**.
 
-**app\Repositories** pour les **[Repositories](#Les repositories)**.
+**app\Repositories** pour les **[Repositories](https://github.com/Alfezior/AppliPart/#les-repositories)**.
 
-**resources\views** pour les **[vues](#Les vues)**.
+**resources\views** pour les **[vues](https://github.com/Alfezior/AppliPart/#les-vues)**.
 
-**app\Http\Requests** pour les **[requêtes](#La sécuritée)**.
+**app\Http\Requests** pour les **[requêtes](https://github.com/Alfezior/AppliPart/#la-s%C3%A9curit%C3%A9e)**.
 
-**database\migrations** pour les **[tables de migration](#Les données)**. 
+**database\migrations** pour les **[tables de migration](https://github.com/Alfezior/AppliPart/#les-donn%C3%A9es)**. 
 
-**app** pour les **[modèles](#Les données)**.
+**app** pour les **[modèles](https://github.com/Alfezior/AppliPart/#les-donn%C3%A9es)**.
 
 ## Les contrôleurs
 
