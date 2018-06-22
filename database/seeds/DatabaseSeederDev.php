@@ -8,7 +8,7 @@ use App\Action;
 use App\Groupe;
 use App\Contact;
 
-class OldDatabaseSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.

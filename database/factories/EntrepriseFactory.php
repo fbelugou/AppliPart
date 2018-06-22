@@ -21,7 +21,7 @@ $factory->define(App\Entreprise::class, function (Faker $faker) {
         'partenaireRegulier' => $faker->boolean($chanceOfGettingTrue = 50),
         'siegeSocial' => $faker->boolean($chanceOfGettingTrue = 0),
         'taille' => $faker->numberBetween($min = 1, $max = 10000),
-        'rue' => $faker->unique()->streetAddress,
+        'adresse1' => $faker->unique()->streetAddress,
         'ville' => $faker->city,
         'cp' => $faker->postcode,
         'siteWeb' => $faker->url,

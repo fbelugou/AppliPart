@@ -198,8 +198,8 @@ return [
                 |
                 */
 
-                'admin_username' => env('ADLDAP_ADMIN_USERNAME', 'apache@racine.2isa.fr'),
-                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', 'aPache654369'),
+                'admin_username' => env('ADLDAP_ADMIN_USERNAME', ''),
+                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', ''),
 
                 /*
                 |--------------------------------------------------------------------------

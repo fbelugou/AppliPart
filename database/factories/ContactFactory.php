@@ -47,7 +47,7 @@ $factory->define(App\Contact::class, function (Faker $faker) {
     return [
         'contactAMIO' => $AMIO,
         'date' => $faker->dateTimeBetween($startDate = '-6 years', $endDate = 'now', $timezone = null),
-        'objet' => $obj,
+        'nature' => $obj,
         'commentaire' => $faker->text($maxNbChars = 200),
     ];
 });
