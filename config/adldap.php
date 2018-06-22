@@ -127,7 +127,7 @@ return [
                 |
                 */
 
-                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.8.172')),
+                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '')),
 
                 /*
                 |--------------------------------------------------------------------------

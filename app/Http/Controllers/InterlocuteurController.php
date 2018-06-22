@@ -46,9 +46,9 @@ class InterlocuteurController extends Controller
         //Récupération des entreprises
         $tabEntreprises = $this->entrepriseRepository->getEntreprises();
         //Mise en forme des objets entreprise pour la liste déroulante
-        foreach ($tabEntreprises as $entreprise) {
+        /*foreach ($tabEntreprises as $entreprise) {
             $entreprises[$entreprise->id]=$entreprise->nom;
-        }
+        }*/
         //Envoi des entreprises à la vue formulaire AjoutInterlocuteur et affichage de la vue
         return view('Interlocuteur\AjoutInterlocuteur',compact('entreprises'));
     }

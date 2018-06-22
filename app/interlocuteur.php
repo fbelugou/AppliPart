@@ -36,7 +36,7 @@ class Interlocuteur extends Model
     //Retourne la liste des entreprises avec les données de la table associative
     public function entreprises()
   	{
-  		return $this->belongsToMany('App\Entreprise','contacts')->withPivot('contactAMIO','date','objet','commentaire');
+  		return $this->belongsToMany('App\Entreprise','contacts')->withPivot('contactAMIO','date','nature','commentaire');
   	}
 
     //Retourne les entreprises de la plus récente à la plus ancienne (par rapport au contact)
