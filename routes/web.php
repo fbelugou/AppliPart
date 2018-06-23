@@ -15,8 +15,8 @@ Route::get( '/Login',                       ['as' => 'login',                   
 Route::post( '/Login',                      [                                    'uses' => 'Auth\LoginController@login']);
 
 //Routes nécéssitant d'être connecté
-Route::group(['middleware' => 'auth'], function()
-{
+// Route::group(['middleware' => 'auth'], function()
+// {
   Route::get( '/',                            ['as' => 'Accueil',                   'uses' => 'GestionController@index']);
 
   Route::get( '/Groupes',                     ['as' => 'Groupes',                   'uses' => 'GroupeController@lister']);
@@ -78,4 +78,4 @@ Route::group(['middleware' => 'auth'], function()
   Route::post('/Recherche/EntreprisesDist',   ['as' => 'rechercheEntreprisesDist',  'uses' => 'EntrepriseController@rechercheDist']);
 
   Route::post( '/Logout',                     ['as' => 'logout',                   'uses' => 'Auth\LoginController@logout']);
-});
+// });

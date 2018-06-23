@@ -3,42 +3,44 @@
 @section('contenu')
 <div class="row">
 	<div class="col-md-12">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
 
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<a class="navbar-brand" href="{{ route('Accueil') }}">
-				<img src="{{ URL::asset('img/AMIOlogo.png') }}" height="33 px" width="83 px"class="rounded float-left" alt="logo AMIO">
-			</a>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="navbar-nav ml-md-auto">
-					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
-					</li>
-					<li class="nav-item">
-						 <a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
-					</li>
-					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Actions') }}">Actions</a>
-					</li>
-					<li class="nav-item">
-						 <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
-					</li>
-					<li class="nav-item">
-						 <span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#" onclick="document.getElementById('formLogout').submit();">Déconnexion</a>
-						{{ Form::open(['url' => route('logout'), 'id' => 'formLogout']) }}
-						{{ Form::close() }}
-					</li>
-				</ul>
-			</div>
-		</nav>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand" href="{{ route('Accueil') }}">
+<img src="{{ URL::asset('img/AMIOlogo.png') }}" height="33 px" width="83 px"class="rounded float-left" alt="logo AMIO">
+</a>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="navbar-nav">
+  <li class="nav-item">
+				<span class="navbar-text">Utilisateur : XX</span>
+		</li>
+		  </ul>
+	<ul class="navbar-nav ml-md-auto">
+		<li class="nav-item">
+				<a class="nav-link" href="{{ route('Accueil') }}">Accueil<span class="sr-only">(current)</span></a>
+		</li>
+  <li class="nav-item">
+				<a class="nav-link" href="{{ route('Groupes') }}">Groupes</a>
+		</li>
+  <li class="nav-item">
+				<a class="nav-link active" href="{{ route('Entreprises') }}">Entreprises</a>
+		</li>
+  <li class="nav-item">
+				<a class="nav-link" href="{{ route('Actions') }}">Actions</a>
+		</li>
+  <li class="nav-item">
+		  <a class="nav-link" href="{{ route('Interlocuteurs') }}">Interlocuteurs</a>
+  </li>
+  <li class="nav-item">
+				<a class="nav-link" href="#" onclick="document.getElementById('formLogout').submit();">Déconnexion</a>
+					  {{ Form::open(['url' => route('logout'), 'id' => 'formLogout']) }}
+					  {{ Form::close() }}
+		</li>
+	</ul>
+</div>
+</nav>
 	</div>
 </div>
 <div class="row">
@@ -51,7 +53,7 @@
 				{{ Form::open(['route' => 'ContactEnregistrer']) }}
           <div id="nat" class="form-group" style="margin-top:10px;">
 						{{ Form::label('contactAMIO', 'Contact au sein d\'AMIO :') }}
-  					{{ Form::text('contactAMIO',strtoupper(auth::user()->initials[0]), ['class' => 'form-control']) }}
+  					{{ Form::text('contactAMIO','XX', ['class' => 'form-control']) }}
   					{!! $errors->first('contactAMIO', '<small class="form-text text-muted">:message</small>') !!}
   				</div>
 					<div class="form-group" style="margin-top:10px;">

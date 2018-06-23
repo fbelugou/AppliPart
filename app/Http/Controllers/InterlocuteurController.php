@@ -35,7 +35,7 @@ class InterlocuteurController extends Controller
         //Récupération de tous les interlocuteurs
         $interlocuteurs = $this->interlocuteurRepository->getInterlocuteurs();
         //Envoi des interlocuteurs à la vue ListeInterlocuteurs et affichage de la vue
-        return view('Interlocuteur\ListeInterlocuteurs', compact('interlocuteurs'));
+        return view('Interlocuteur/ListeInterlocuteurs', compact('interlocuteurs'));
     }
 
     //Fonction d'ajout d'un interlocuteur
@@ -50,7 +50,7 @@ class InterlocuteurController extends Controller
             $entreprises[$entreprise->id]=$entreprise->nom;
         }*/
         //Envoi des entreprises à la vue formulaire AjoutInterlocuteur et affichage de la vue
-        return view('Interlocuteur\AjoutInterlocuteur',compact('entreprises'));
+        return view('Interlocuteur/AjoutInterlocuteur',compact('entreprises'));
     }
 
     //Fonction d'enregistrement en base de données d'un interlocuteur avec des données d'un formulaire
@@ -61,10 +61,10 @@ class InterlocuteurController extends Controller
         //Envoi d'un mail pour prévenir l'utilisateur de son ajour à la base (si l'adresse n'est pas nulle)
         //Mail modifiable : ressources/views/mail.blade.php
         //Sujet et envoyeur du mail modifiable : app/mail/ajoutBD.php
-        if(!is_null($interlocuteur->mail)){
+        /*if(!is_null($interlocuteur->mail)){
             Mail::to($interlocuteur->mail, $interlocuteur->prenom.' '.$interlocuteur->nom)
                   ->send(new AjoutBD($interlocuteur));
-        }
+        }*/
         //Redirection à l'action FicheInterlocuteur du controller avec l'id de l'interlocuteur
         return redirect()->route('FicheInterlocuteur',['id' => $interlocuteur->id]);
     }
@@ -75,7 +75,7 @@ class InterlocuteurController extends Controller
         //récupération de l'interlocuteur via l'id
         $interlocuteur = $this->interlocuteurRepository->getById($id);
         //Envoir de l'interlocuteur à la vue FicheInterlocuteur et affichage de la vue
-        return view('Interlocuteur\FicheInterlocuteur',  compact('interlocuteur'));
+        return view('Interlocuteur/FicheInterlocuteur',  compact('interlocuteur'));
     }
 
     //Fonction d'affichage de formulaire de modification d'un interlocuteur
@@ -104,7 +104,7 @@ class InterlocuteurController extends Controller
             break;
         }
         //Envoi de l'interlocuteur, des entreprises et du type de fonction à la vue ModifierInterlocuteur et affichage de la vue
-        return view('Interlocuteur\ModifierInterlocuteur',  compact('interlocuteur','entreprises','nbType'));
+        return view('Interlocuteur/ModifierInterlocuteur',  compact('interlocuteur','entreprises','nbType'));
     }
 
     //Fonction de modification d'un interlocuteur en base de données
@@ -119,6 +119,10 @@ class InterlocuteurController extends Controller
     //Fonction de suppression d'un interlocuteur
     public function supprimer($id)
     {
+        //Récupération de l'interlocuteur
+        $interlocuteur = $this->interlocuteurRepository->getById($id);
+        //Suppression du lien etre l'interlocuteur et les entreprises
+        $interlocuteur->entreprises()->detach();
         //Suppression de l'interlocuteur
         $this->interlocuteurRepository->destroy($id);
         //Redirection à la liste des interlocuteurs
@@ -140,6 +144,6 @@ class InterlocuteurController extends Controller
         //Appel à la méthode du répository pour chercher un interlocuteur
         $interlocuteurs = $this->interlocuteurRepository->search($request->all());
         //Envoi des résultats à la vue RechercheInterlocuteurs et affichage de la vue
-        return view('Interlocuteur\RechercheInterlocuteurs',compact('interlocuteurs'));
+        return view('Interlocuteur/RechercheInterlocuteurs',compact('interlocuteurs'));
     }
 }

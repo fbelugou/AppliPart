@@ -59,7 +59,7 @@ class EntrepriseController extends Controller
         //Récupération de toutes les entreprises
         $entreprises = $this->entrepriseRepository->getEntreprises();
         //Envoi des entreprises à la vue ListeEntreprises et affichage de la vue
-        return view('Entreprise\ListeEntreprises', compact('entreprises'));
+        return view('Entreprise/ListeEntreprises', compact('entreprises'));
     }
 
     //Fonction de listage des partenaires réguliers
@@ -68,7 +68,7 @@ class EntrepriseController extends Controller
         //Récupération des partenaires réguliers
         $entreprises = $this->entrepriseRepository->getPartenaires();
         //Envoi des partenaires réguliers à la vue ListePartenaires et affichage de la vue
-        return view('Entreprise\ListePartenaires', compact('entreprises'));
+        return view('Entreprise/ListePartenaires', compact('entreprises'));
     }
 
     //Fonction d'ajout d'une entreprise
@@ -107,7 +107,7 @@ class EntrepriseController extends Controller
             $interlocuteurs[$interlocuteur->id]=$interlocuteur->prenom." ".$interlocuteur->nom;
         }
         //Envoi des tableaux pour les listes déroulantes à la vue AjoutEntreprise et affichage de la vue
-        return view('Entreprise\AjoutEntreprise',compact('groupes','activites','filieres','interlocuteurs'));
+        return view('Entreprise/AjoutEntreprise',compact('groupes','activites','filieres','interlocuteurs'));
     }
 
     //Fonction d'enregistrement en base de données d'une entreprise avec des données d'un formulaire
@@ -125,7 +125,7 @@ class EntrepriseController extends Controller
         //Récupération de l'entreprise via l'id
         $entreprise = $this->entrepriseRepository->getById($id);
         //Envoi de l'entreprise à la vue FicheEntreprise et affichage de la vue
-        return view('Entreprise\FicheEntreprise',  compact('entreprise'));
+        return view('Entreprise/FicheEntreprise',  compact('entreprise'));
     }
 
     //Fonction d'affichage de formulaire de modification d'une entreprise
@@ -166,7 +166,7 @@ class EntrepriseController extends Controller
             $interlocuteurs[$interlocuteur->id]=$interlocuteur->prenom." ".$interlocuteur->nom;
         }
         //Envoi de l'entreprise et des listes à la vue ModifierEntreprise et affichage de la vue
-        return view('Entreprise\ModifierEntreprise',  compact('entreprise','groupes','activites','filieres','interlocuteurs'));
+        return view('Entreprise/ModifierEntreprise',  compact('entreprise','groupes','activites','filieres','interlocuteurs'));
     }
 
     //Fonction de modification d'une entreprise en base de données
@@ -194,11 +194,12 @@ class EntrepriseController extends Controller
             $this->evenementRepository->destroy($evenement->id);
         }
         //Suppression des actions de l'entreprise
-        foreach($entreprise->actions() as $action){
+        //dd($entreprise->actions);
+        foreach($entreprise->actions as $action){
             $this->actionRepository->destroy($action->id);
         }
         //Suppression des coordonnees de l'entreprise
-        foreach($entreprise->coordonnees() as $coord){
+        foreach($entreprise->coordonnees as $coord){
             $this->coordonneesRepository->destroy($coord->id);
         }
 
@@ -214,7 +215,7 @@ class EntrepriseController extends Controller
         //Appel à la méthode du repository pour chercher une entreprise
         $entreprises=$this->entrepriseRepository->search($request->all());
         //Envoi des résultats à la vue RechercheEntreprises et affichage de la vue
-        return view('Entreprise\RechercheEntreprises',  compact('entreprises'));
+        return view('Entreprise/RechercheEntreprises',  compact('entreprises'));
     }
 
     //Fonction de recherche d'entreprises par rapport à une distance
@@ -229,7 +230,7 @@ class EntrepriseController extends Controller
         //Récupération des entreprises
         $entreprises=$resultat['entreprises'];
         //Envoi des entreprises à la vue RechercheEntreprises et affichage de la vue
-        return view('Entreprise\RechercheEntreprises',  compact('entreprises'));
+        return view('Entreprise/RechercheEntreprises',  compact('entreprises'));
     }
 
     //Fonction d'affichage d'un formulaire de génération d'une liste de mails
@@ -238,7 +239,7 @@ class EntrepriseController extends Controller
         //Récupération des entreprises
         $entreprises = $this->entrepriseRepository->getEntreprises();
         //Envoi des entreprises à la vue FormulaireMails et affichage de la vue
-        return view('Entreprise\FormulaireMails',compact('entreprises'));
+        return view('Entreprise/FormulaireMails',compact('entreprises'));
     }
 
     //Fonction de génération d'une liste de mails avec les données d'un formulaire

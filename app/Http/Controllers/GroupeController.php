@@ -32,14 +32,14 @@ class GroupeController extends Controller
         //Récupération de tous les groupes
         $groupes = $this->groupeRepository->getGroupes();
         //Envoi des groupes à la vue ListeGroupes et affichage de la vue
-        return view('Groupe\ListeGroupes', compact('groupes'));
+        return view('Groupe/ListeGroupes', compact('groupes'));
     }
 
     //Fonction d'ajout d'un groupe
     public function ajouter()
     {
         //Affichage de le vue de formulaire d'ajout de groupe AjoutGroupe
-        return view('Groupe\AjoutGroupe');
+        return view('Groupe/AjoutGroupe');
     }
 
     //Fonction d'enregistrement en base de données d'un groupe avec des données d'un formulaire
@@ -57,7 +57,7 @@ class GroupeController extends Controller
         //Récupération du groupe via l'id
         $groupe = $this->groupeRepository->getById($id);
         //Envoi du groupe à la vue FicheGroupe et affichage de la vue
-        return view('Groupe\FicheGroupe',  compact('groupe'));
+        return view('Groupe/FicheGroupe',  compact('groupe'));
     }
 
     //Fonction d'affichage de formulaire de modification d'un groupe
@@ -66,7 +66,7 @@ class GroupeController extends Controller
         //Récupération du groupe via l'id
         $groupe = $this->groupeRepository->getById($id);
         //Envoi du groupe à la vue ModifierGroupe et affichage de la vue
-        return view('Groupe\ModifierGroupe',  compact('groupe'));
+        return view('Groupe/ModifierGroupe',  compact('groupe'));
     }
 
     //Fonction de modification d'un groupe en base de données
@@ -84,7 +84,7 @@ class GroupeController extends Controller
         //Récupération de l'entreprise
         $groupe = $this->groupeRepository->getById($id);
         //Suppression des entreprises du groupe
-        foreach($groupe->entreprises() as $entreprise){
+        foreach($groupe->entreprises as $entreprise){
             $this->EntrepriseRepository->destroy($entreprise->id);
         }
         //Suppression du groupe
@@ -99,6 +99,6 @@ class GroupeController extends Controller
         //Appel à la méthode du repository pour chercher un groupe
         $groupes = $this->groupeRepository->search($request->all());
         //Envoi des résultats à la vue RechercheGroupes et affichage de la vue
-        return view('Groupe\RechercheGroupes',  compact('groupes'));
+        return view('Groupe/RechercheGroupes',  compact('groupes'));
     }
 }

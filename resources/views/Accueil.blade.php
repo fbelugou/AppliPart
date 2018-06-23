@@ -17,7 +17,7 @@
       	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="navbar-nav">
             <li class="nav-item">
-      					<span class="navbar-text">Utilisateur : {{ strtoupper(Auth::user()->initials[0]) }}</span>
+      					<span class="navbar-text">Utilisateur : XX</span>
       			</li>
 					</ul>
       		<ul class="navbar-nav ml-md-auto">

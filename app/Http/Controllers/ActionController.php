@@ -32,7 +32,7 @@ class ActionController extends Controller
         //Récupération de toutes les actions
         $actions = $this->actionRepository->getActions();
         //Envoi des actions à la vue ListeActions et affichage de la vue
-        return view('Action\ListeActions', compact('actions'));
+        return view('Action/ListeActions', compact('actions'));
     }
 
     //Fonction d'ajout d'une action
@@ -47,7 +47,7 @@ class ActionController extends Controller
             $entreprises[$entreprise->id]=$entreprise->nom;
         }
         //Envoi du tableau pour la liste déroulante à la vue AjoutAction et affichage de la vue
-        return view('Action\AjoutAction',compact('entreprises'));
+        return view('Action/AjoutAction',compact('entreprises'));
     }
 
     //Fonction d'ajout d'une action avec l'entreprise déjà renseignée
@@ -62,7 +62,7 @@ class ActionController extends Controller
             $entreprises[$entreprise->id]=$entreprise->nom;
         }
         //Envoi du tableau pour la liste déroulante à la vue AjoutAction et affichage de la vue
-        return view('Action\AjoutAction',compact('entreprises','entreprise_id'));
+        return view('Action/AjoutAction',compact('entreprises','entreprise_id'));
     }
 
     //Fonction d'enregistrement en base de données d'une action avec des données d'un formulaire
@@ -80,7 +80,7 @@ class ActionController extends Controller
         //Récupération de l'action via l'id
         $action = $this->actionRepository->getById($id);
         //Envoi de l'action à la vue FicheAction et affichage de la vue
-        return view('Action\FicheAction',  compact('action'));
+        return view('Action/FicheAction',  compact('action'));
     }
 
     //Fonction d'affichage de formulaire de modification d'une action
@@ -97,7 +97,7 @@ class ActionController extends Controller
             $entreprises[$entreprise->id]=$entreprise->nom;
         }
         //Envoi de l'action et des entreprises à la vue ModifierAction et affichage de la vue
-        return view('Action\ModifierAction',  compact('action','entreprises'));
+        return view('Action/ModifierAction',  compact('action','entreprises'));
     }
 
     //Fonction de modification d'une action en base de données
@@ -168,6 +168,6 @@ class ActionController extends Controller
         //Enregistrement en variable de la limitation des actions au partenaires réguliers
         $partReg=$request['limiteEntAct'];
         //Envoi des actions du libellé de la nature et de la limitation à la vue RechercheActions et affichage de la vue
-        return view('Action\RechercheActions',  compact('actions','nature','partReg'));
+        return view('Action/RechercheActions',  compact('actions','nature','partReg'));
     }
 }

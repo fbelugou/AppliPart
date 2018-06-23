@@ -54,7 +54,7 @@ class ContactController extends Controller
             }
         }
         //Envoi des tableau pour les listes déroulantes à la vue AjoutContact et affichage de la vue
-        return view('Contact\AjoutContact',compact('entreprise_id','entreprises','interlocuteurs'));
+        return view('Contact/AjoutContact',compact('entreprise_id','entreprises','interlocuteurs'));
     }
 
     //Fonction d'enregistrement en base de données d'un contact avec des données d'un formulaire
@@ -76,7 +76,7 @@ class ContactController extends Controller
         //Récupération de l'interlocuteur via l'id dans l'objet contact
         $interlocuteur = $this->interlocuteurRepository->getById($contact->interlocuteur_id);
         //Envoi du contact, de l'entreprise et de l'interlocteur à la vue FicheContact et affichage de la vue
-        return view('Contact\FicheContact',  compact('contact','entreprise','interlocuteur'));
+        return view('Contact/FicheContact',  compact('contact','entreprise','interlocuteur'));
     }
 
     //Fonction d'affichage de formulaire de modification d'un contact
@@ -101,7 +101,7 @@ class ContactController extends Controller
             $interlocuteurs[$interlocuteur->id]=$interlocuteur->prenom.' '.$interlocuteur->nom;
         }
         //Envoi du coontact, des entreprises, des interlocuteurs et l'id de l'entreprise à la vue ModifierContact et affichage de la vue
-        return view('Contact\ModifierContact',compact('entreprise_id','entreprises','interlocuteurs','contact'));
+        return view('Contact/ModifierContact',compact('entreprise_id','entreprises','interlocuteurs','contact'));
     }
 
     //Fonction de modification d'un objet en base de données

@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         //Version permettant de remplir avecde fausses données
 
-        factory(Entreprise::class, 50)->create();
-        factory(Interlocuteur::class, 60)->create();
-        factory(Action::class, 100)->create();
+        factory(Entreprise::class, 20)->create();
+        factory(Interlocuteur::class, 20)->create();
+        factory(Action::class, 30)->create();
         factory(Groupe::class, 20)->create();
         factory(Contact::class, 80)->create();
         factory(Groupe::class, 20)->create();
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         for ($n=1; $n<61 ; $n++) {
             $nb =rand(1,2);
             for ($p=1; $p<=$nb ; $p++) {
-                DB::table('contacts')->where('id', $c)->update(['entreprise_id' => rand(1,50),'interlocuteur_id' => $n]);
+                DB::table('contacts')->where('id', $c)->update(['entreprise_id' => rand(1,20),'interlocuteur_id' => $n]);
                 $c++;
             }
             $c++;
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         //--------------------------------------------------------------------------
         //Lien Entreprises Groupes
 
-        for ($m=1; $m < 51 ; $m++) {
+        for ($m=1; $m < 21 ; $m++) {
             if(rand(0,1)){
               DB::table('entreprises')->where('id', $m)->update(['groupe_id' => rand(1,20),'siegeSocial'=> rand(0,1)]);
             }
@@ -67,47 +67,47 @@ class DatabaseSeeder extends Seeder
         //--------------------------------------------------------------------------
         //Lien Entreprises Actions avec libelle actions
 
-        for ($k=1;$k<101;$k++){
+        for ($k=1;$k<31;$k++){
             $num=rand(1,13);
             switch ($num) {
               case 1:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Stage','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Stage','entreprise_id' => rand(1,20)]);
                 break;
               case 2:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Alternance','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Alternance','entreprise_id' => rand(1,20)]);
                 break;
               case 3:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'JobDating','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'JobDating','entreprise_id' => rand(1,20)]);
                 break;
               case 4:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Visite d\'entreprise','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Visite d\'entreprise','entreprise_id' => rand(1,20)]);
                 break;
               case 5:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Taxe d\'apprentissage','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Taxe d\'apprentissage','entreprise_id' => rand(1,20)]);
                 break;
               case 6:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Jury d\'examen','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Jury d\'examen','entreprise_id' => rand(1,20)]);
                 break;
               case 7:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Parrainage','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Parrainage','entreprise_id' => rand(1,20)]);
                 break;
               case 8:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Intervention technique','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Intervention technique','entreprise_id' => rand(1,20)]);
                 break;
               case 9:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Formation stagiaire','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Formation stagiaire','entreprise_id' => rand(1,20)]);
                 break;
               case 10:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Formation formateur','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Formation formateur','entreprise_id' => rand(1,20)]);
                 break;
               case 11:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Embauche','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Embauche','entreprise_id' => rand(1,20)]);
                 break;
               case 12:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Don de materiel','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Don de materiel','entreprise_id' => rand(1,20)]);
                 break;
               case 13:
-                DB::table('actions')->where('id', $k)->update(['nature' => 'Autres','entreprise_id' => rand(1,50)]);
+                DB::table('actions')->where('id', $k)->update(['nature' => 'Autres','entreprise_id' => rand(1,20)]);
                 break;
             }
         }
@@ -115,7 +115,7 @@ class DatabaseSeeder extends Seeder
         //--------------------------------------------------------------------------
         //Lien Entreprises Filieres
 
-        for ($i = 1; $i < 51; $i++) {
+        for ($i = 1; $i < 21; $i++) {
             $number = rand(1, 3);
             for ($j = 1; $j <= $number; $j++) {
                 DB::table('entreprises_filieres')->insert([
@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
         //--------------------------------------------------------------------------
         //Lien Entreprises Activités
 
-        for ($w = 1; $w < 51; $w++) {
+        for ($w = 1; $w < 21; $w++) {
             $number = rand(1, 2);
             for ($x = 1; $x <= $number; $x++) {
                 DB::table('entreprises_activites')->insert([
