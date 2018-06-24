@@ -13,17 +13,20 @@ use App\Http\Requests\GroupeSearchRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EntrepriseController;
 
 class GroupeController extends Controller
 {
     protected $groupeRepository;
     protected $entrepriseRepository;
+    protected $entrepriseController;
 
-    public function __construct(groupeRepository $groupeRepository,EntrepriseRepository $entrepriseRepository)
+    public function __construct(groupeRepository $groupeRepository,EntrepriseRepository $entrepriseRepository,EntrepriseController $entrepriseController)
     {
         //Recuperation des repository nécéssaires
         $this->groupeRepository = $groupeRepository;
         $this->entrepriseRepository = $entrepriseRepository;
+        $this->entrepriseController = $entrepriseController;
     }
 
     //Fonction de listage des groupes
@@ -85,7 +88,8 @@ class GroupeController extends Controller
         $groupe = $this->groupeRepository->getById($id);
         //Suppression des entreprises du groupe
         foreach($groupe->entreprises as $entreprise){
-            $this->EntrepriseRepository->destroy($entreprise->id);
+          //dd($entreprise);
+            $this->entrepriseController->supprimer($entreprise->id);
         }
         //Suppression du groupe
         $this->groupeRepository->destroy($id);

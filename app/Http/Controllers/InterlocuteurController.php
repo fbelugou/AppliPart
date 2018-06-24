@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Repositories\InterlocuteurRepository;
 use App\Repositories\EntrepriseRepository;
+use App\Repositories\InterlocuteurEventRepository;
 
 use App\Http\Requests\InterlocuteurCreateRequest;
 use App\Http\Requests\InterlocuteurUpdateRequest;
@@ -21,12 +22,14 @@ class InterlocuteurController extends Controller
 {
     protected $interlocuteurRepository;
     protected $entrepriseRepository;
+    protected $evenementRepository;
 
-    public function __construct(interlocuteurRepository $interlocuteurRepository,entrepriseRepository $entrepriseRepository)
+    public function __construct(interlocuteurRepository $interlocuteurRepository,entrepriseRepository $entrepriseRepository,InterlocuteurEventRepository $evenementRepository)
     {
         //Recuperation des repository nécéssaires
         $this->interlocuteurRepository = $interlocuteurRepository;
         $this->entrepriseRepository = $entrepriseRepository;
+        $this->evenementRepository = $evenementRepository;
     }
 
     //Fonction de listage des interlocuteurs
@@ -123,6 +126,10 @@ class InterlocuteurController extends Controller
         $interlocuteur = $this->interlocuteurRepository->getById($id);
         //Suppression du lien etre l'interlocuteur et les entreprises
         $interlocuteur->entreprises()->detach();
+        //Suppression des evenements de l'interlocuteur
+        foreach($interlocuteur->evenements as $evenement){
+            $this->evenementRepository->destroy($evenement->id);
+        }
         //Suppression de l'interlocuteur
         $this->interlocuteurRepository->destroy($id);
         //Redirection à la liste des interlocuteurs

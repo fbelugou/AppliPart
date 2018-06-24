@@ -14,6 +14,12 @@ class InterlocuteurEventRepository
   		  $this->interlocuteurEvent = $interlocuteurEvent;
   	}
 
+    //Fonction de récupération d'un evenelent d'interlocuteur selon l'id
+  	public function getById($id)
+  	{
+    		return $this->interlocuteurEvent->findOrFail($id);
+  	}
+
     //Fonction d'enregistrement en base de données d'un evenement sur une fiche d'entreprise
   	private function save(InterlocuteurEvent $interlocuteurEvent, Array $inputs)
   	{
@@ -36,5 +42,11 @@ class InterlocuteurEventRepository
         $this->save($interlocuteurEvent, $inputs);
         //Retourne l'objet créé
     		return $interlocuteurEvent;
+  	}
+
+    //Fonction de suppression d'un evenement d'interlocuteur
+  	public function destroy($id)
+  	{
+  		  $this->getById($id)->delete();
   	}
 }

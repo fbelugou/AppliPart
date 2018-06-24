@@ -190,7 +190,7 @@ class EntrepriseController extends Controller
         //Suppression du lien etre l'entreprise et les activites
         $entreprise->activites()->detach();
         //Suppression des evenements de l'entreprise
-        foreach($entreprise->evenements() as $evenement){
+        foreach($entreprise->evenements as $evenement){
             $this->evenementRepository->destroy($evenement->id);
         }
         //Suppression des actions de l'entreprise
@@ -200,7 +200,8 @@ class EntrepriseController extends Controller
         }
         //Suppression des coordonnees de l'entreprise
         foreach($entreprise->coordonnees as $coord){
-            $this->coordonneesRepository->destroy($coord->id);
+            if(is_a($coord,'Coordonnees'))
+                $this->coordonneesRepository->destroy($coord->id);
         }
 
         //Appel à la méthode du repository pour supprimer l'entreprise de la base de données

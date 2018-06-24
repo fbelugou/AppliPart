@@ -14,6 +14,12 @@ class EntrepriseEventRepository
   		  $this->entrepriseEvent = $entrepriseEvent;
   	}
 
+    //Fonction de récupération d'un evenement d'entreprise selon l'id
+  	public function getById($id)
+  	{
+    		return $this->entrepriseEvent->findOrFail($id);
+  	}
+
     //Fonction d'enregistrement en base de données d'un evenement sur une fiche d'entreprise
   	private function save(EntrepriseEvent $entrepriseEvent, Array $inputs)
   	{
@@ -36,5 +42,11 @@ class EntrepriseEventRepository
     		$this->save($entrepriseEvent, $inputs);
         //Retourne l'objet créé
     		return $entrepriseEvent;
+  	}
+
+    //Fonction de suppression d'un evenement d'entreprise
+  	public function destroy($id)
+  	{
+  		  $this->getById($id)->delete();
   	}
 }
